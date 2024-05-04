@@ -1,0 +1,12 @@
+C:\VisualStudio_projects\CSharp_Crafting\CleanArchitectureWithApp\Hotels\WebHotels.Application\bin\Debug\net8.0\WebHotels.Application.deps.json
+C:\VisualStudio_projects\CSharp_Crafting\CleanArchitectureWithApp\Hotels\WebHotels.Application\bin\Debug\net8.0\WebHotels.Application.dll
+C:\VisualStudio_projects\CSharp_Crafting\CleanArchitectureWithApp\Hotels\WebHotels.Application\bin\Debug\net8.0\WebHotels.Application.pdb
+C:\VisualStudio_projects\CSharp_Crafting\CleanArchitectureWithApp\Hotels\WebHotels.Application\obj\Debug\net8.0\WebHotels.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\VisualStudio_projects\CSharp_Crafting\CleanArchitectureWithApp\Hotels\WebHotels.Application\obj\Debug\net8.0\WebHotels.Application.AssemblyInfoInputs.cache
+C:\VisualStudio_projects\CSharp_Crafting\CleanArchitectureWithApp\Hotels\WebHotels.Application\obj\Debug\net8.0\WebHotels.Application.AssemblyInfo.cs
+C:\VisualStudio_projects\CSharp_Crafting\CleanArchitectureWithApp\Hotels\WebHotels.Application\obj\Debug\net8.0\WebHotels.Application.csproj.CoreCompileInputs.cache
+C:\VisualStudio_projects\CSharp_Crafting\CleanArchitectureWithApp\Hotels\WebHotels.Application\obj\Debug\net8.0\WebHotels.Application.sourcelink.json
+C:\VisualStudio_projects\CSharp_Crafting\CleanArchitectureWithApp\Hotels\WebHotels.Application\obj\Debug\net8.0\WebHotels.Application.dll
+C:\VisualStudio_projects\CSharp_Crafting\CleanArchitectureWithApp\Hotels\WebHotels.Application\obj\Debug\net8.0\refint\WebHotels.Application.dll
+C:\VisualStudio_projects\CSharp_Crafting\CleanArchitectureWithApp\Hotels\WebHotels.Application\obj\Debug\net8.0\WebHotels.Application.pdb
+C:\VisualStudio_projects\CSharp_Crafting\CleanArchitectureWithApp\Hotels\WebHotels.Application\obj\Debug\net8.0\ref\WebHotels.Application.dll
