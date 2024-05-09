@@ -3,12 +3,52 @@
   "WorkspaceRootPath": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\views\\hotel\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|solutionrelative:webhotels\\views\\hotel\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\views\\hotel\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|solutionrelative:webhotels\\views\\hotel\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\views\\hotel\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|solutionrelative:webhotels\\views\\hotel\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\views\\hotel\\update.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|solutionrelative:webhotels\\views\\hotel\\update.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|solutionrelative:webhotels\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\views\\shared\\_notification.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|solutionrelative:webhotels\\views\\shared\\_notification.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|solutionrelative:webhotels\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|solutionrelative:webhotels\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\views\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|solutionrelative:webhotels\\views\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\controllers\\hotelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|solutionrelative:webhotels\\controllers\\hotelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4CF82C48-7048-4654-8AAC-EA18632FFFFD}|WebHotels.Infrastructure\\WebHotels.Infrastructure.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CF82C48-7048-4654-8AAC-EA18632FFFFD}|WebHotels.Infrastructure\\WebHotels.Infrastructure.csproj|solutionrelative:webhotels.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DC23F34-9DB4-4CC0-AA79-8EB940B2232C}|WebHotels.Domain\\WebHotels.Domain.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels.domain\\entities\\hotel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DC23F34-9DB4-4CC0-AA79-8EB940B2232C}|WebHotels.Domain\\WebHotels.Domain.csproj|solutionrelative:webhotels.domain\\entities\\hotel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,26 +57,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|solutionrelative:webhotels\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\views\\hotel\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|solutionrelative:webhotels\\views\\hotel\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\views\\hotel\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|solutionrelative:webhotels\\views\\hotel\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9DC23F34-9DB4-4CC0-AA79-8EB940B2232C}|WebHotels.Domain\\WebHotels.Domain.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels.domain\\entities\\hotel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9DC23F34-9DB4-4CC0-AA79-8EB940B2232C}|WebHotels.Domain\\WebHotels.Domain.csproj|solutionrelative:webhotels.domain\\entities\\hotel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4CF82C48-7048-4654-8AAC-EA18632FFFFD}|WebHotels.Infrastructure\\WebHotels.Infrastructure.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4CF82C48-7048-4654-8AAC-EA18632FFFFD}|WebHotels.Infrastructure\\WebHotels.Infrastructure.csproj|solutionrelative:webhotels.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|c:\\visualstudio_projects\\csharp_crafting\\cleanarchitecturewithapp\\hotels\\webhotels\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{31B6E475-07C2-46C0-991D-A01DE1C69831}|WebHotels\\WebHotels.Web.csproj|solutionrelative:webhotels\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,60 +66,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Error.cshtml",
-              "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Shared\\Error.cshtml",
-              "RelativeDocumentMoniker": "WebHotels\\Views\\Shared\\Error.cshtml",
-              "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Shared\\Error.cshtml",
-              "RelativeToolTip": "WebHotels\\Views\\Shared\\Error.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAGAAAA",
+              "DocumentIndex": 4,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "WebHotels\\Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "WebHotels\\Views\\_ViewImports.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-09T15:57:36.57Z"
+              "WhenOpened": "2024-05-09T23:31:46.266Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "WebHotels\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "WebHotels\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABwAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-09T15:49:24.347Z"
+              "DocumentIndex": 8,
+              "Title": "_Layout.cshtml.css",
+              "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Shared\\_Layout.cshtml.css",
+              "RelativeDocumentMoniker": "WebHotels\\Views\\Shared\\_Layout.cshtml.css",
+              "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Shared\\_Layout.cshtml.css",
+              "RelativeToolTip": "WebHotels\\Views\\Shared\\_Layout.cshtml.css",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAACoAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-05-09T23:27:25.861Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
+              "Title": "_Notification.cshtml",
+              "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Shared\\_Notification.cshtml",
+              "RelativeDocumentMoniker": "WebHotels\\Views\\Shared\\_Notification.cshtml",
+              "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Shared\\_Notification.cshtml",
+              "RelativeToolTip": "WebHotels\\Views\\Shared\\_Notification.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-09T23:17:03.746Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "WebHotels\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "WebHotels\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC0AAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-09T23:07:39.55Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Update.cshtml",
               "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Hotel\\Update.cshtml",
               "RelativeDocumentMoniker": "WebHotels\\Views\\Hotel\\Update.cshtml",
               "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Hotel\\Update.cshtml",
               "RelativeToolTip": "WebHotels\\Views\\Hotel\\Update.cshtml",
-              "ViewState": "AQIAACQAAAAAAAAAAAAAADAAAAA0AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-05-09T15:37:06.005Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels.Infrastructure\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "WebHotels.Infrastructure\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels.Infrastructure\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "WebHotels.Infrastructure\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-09T15:13:38.362Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "_ValidationScriptsPartial.cshtml",
               "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "RelativeDocumentMoniker": "WebHotels\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
@@ -107,23 +143,64 @@
               "RelativeToolTip": "WebHotels\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-09T09:43:58.941Z"
+              "WhenOpened": "2024-05-09T09:43:58.941Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Hotel\\Index.cshtml",
               "RelativeDocumentMoniker": "WebHotels\\Views\\Hotel\\Index.cshtml",
               "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Hotel\\Index.cshtml",
               "RelativeToolTip": "WebHotels\\Views\\Hotel\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC0AAABcAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-09T09:26:35.396Z"
+              "WhenOpened": "2024-05-09T09:26:35.396Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Hotel\\Delete.cshtml",
+              "RelativeDocumentMoniker": "WebHotels\\Views\\Hotel\\Delete.cshtml",
+              "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Hotel\\Delete.cshtml",
+              "RelativeToolTip": "WebHotels\\Views\\Hotel\\Delete.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-09T22:34:59.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Hotel\\Create.cshtml",
+              "RelativeDocumentMoniker": "WebHotels\\Views\\Hotel\\Create.cshtml",
+              "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Hotel\\Create.cshtml",
+              "RelativeToolTip": "WebHotels\\Views\\Hotel\\Create.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-08T22:21:31.459Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "WebHotels.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "WebHotels.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAAAAAC4AAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-09T15:13:38.362Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "Hotel.cs",
               "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels.Domain\\Entities\\Hotel.cs",
               "RelativeDocumentMoniker": "WebHotels.Domain\\Entities\\Hotel.cs",
@@ -131,31 +208,47 @@
               "RelativeToolTip": "WebHotels.Domain\\Entities\\Hotel.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAABQAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-09T08:52:59.708Z"
+              "WhenOpened": "2024-05-09T08:52:59.708Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Hotel\\Create.cshtml",
-              "RelativeDocumentMoniker": "WebHotels\\Views\\Hotel\\Create.cshtml",
-              "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Hotel\\Create.cshtml",
-              "RelativeToolTip": "WebHotels\\Views\\Hotel\\Create.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAKAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-08T22:21:31.459Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 9,
               "Title": "HotelController.cs",
               "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Controllers\\HotelController.cs",
               "RelativeDocumentMoniker": "WebHotels\\Controllers\\HotelController.cs",
               "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Controllers\\HotelController.cs",
               "RelativeToolTip": "WebHotels\\Controllers\\HotelController.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAIwDMAAAAdAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAcwCYAAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T22:16:29.312Z"
+              "WhenOpened": "2024-05-08T22:16:29.312Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "WebHotels\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "WebHotels\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAEBVwBwAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-09T15:49:24.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Shared\\Error.cshtml",
+              "RelativeDocumentMoniker": "WebHotels\\Views\\Shared\\Error.cshtml",
+              "ToolTip": "C:\\VisualStudio_projects\\CSharp_Crafting\\CleanArchitectureWithApp\\Hotels\\WebHotels\\Views\\Shared\\Error.cshtml",
+              "RelativeToolTip": "WebHotels\\Views\\Shared\\Error.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-09T15:57:36.57Z",
+              "EditorCaption": ""
             }
           ]
         }

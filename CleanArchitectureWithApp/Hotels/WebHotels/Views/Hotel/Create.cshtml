@@ -1,4 +1,5 @@
-﻿@model WebHotels.Domain.Entities.Hotel
+﻿@model Hotel
+
 
 <div class="w-100 card border-0 p-4">
     <div class="card-header bg-success bg-gradient ml-0 py-3">
@@ -38,7 +39,7 @@
                     <span asp-validation-for="Occupancy" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="ImageUrl" hidden class="form-control border shadow" />
+                    <input asp-for="ImageUrl" class="form-control border shadow" />
 @*                     <input asp-for="Image" class="form-control border shadow" /> *@
                     <label asp-for="ImageUrl" class="ms-2 "></label>
                     <span asp-validation-for="ImageUrl" class="text-danger"></span>
