@@ -18,4 +18,8 @@
     <ProjectReference Include="..\WebHotels.Infrastructure\WebHotels.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
