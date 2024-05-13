@@ -17,6 +17,7 @@ namespace WebHotels.Infrastructure.Data
         }
 
         public DbSet<Hotel> Hotels { get; set; }
+        public DbSet<HotelNumber> HotelNumbers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -53,6 +54,54 @@ namespace WebHotels.Infrastructure.Data
                     Price = 400,
                     Sqft = 750,
                 });
+
+            modelBuilder.Entity<HotelNumber>().HasData(
+                    new HotelNumber
+                    {
+                        Hotel_Number = 101,
+                        HotelId = 1,
+                    },
+                    new HotelNumber
+                    {
+                        Hotel_Number = 102,
+                        HotelId = 1,
+                    },
+                    new HotelNumber
+                    {
+                        Hotel_Number = 103,
+                        HotelId = 1,
+                    },
+                    new HotelNumber
+                    {
+                        Hotel_Number = 104,
+                        HotelId = 1,
+                    },
+                    new HotelNumber
+                    {
+                        Hotel_Number = 201,
+                        HotelId = 2,
+                    },
+                    new HotelNumber
+                    {
+                        Hotel_Number = 202,
+                        HotelId = 2,
+                    },
+                    new HotelNumber
+                    {
+                        Hotel_Number = 203,
+                        HotelId = 2,
+                    },
+                    new HotelNumber
+                    {
+                        Hotel_Number = 301,
+                        HotelId = 3,
+                    },
+                    new HotelNumber
+                    {
+                        Hotel_Number = 302,
+                        HotelId = 3,
+                    });
+
         }
     }
 }
