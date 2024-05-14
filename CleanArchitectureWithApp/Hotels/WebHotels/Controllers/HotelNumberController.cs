@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using WebHotels.Domain.Entities;
 using WebHotels.Infrastructure.Data;
@@ -18,7 +19,7 @@ namespace WebHotels.Web.Controllers
 
         public IActionResult Index()
         {
-            var hotelsNumbers = _db.HotelNumbers.ToList();
+            var hotelsNumbers = _db.HotelNumbers.Include(u => u.Hotel).ToList();
             return View(hotelsNumbers);
         }
         public IActionResult Create()
