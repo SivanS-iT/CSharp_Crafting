@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace WebHotels.Domain.Entities
 {
@@ -16,6 +17,8 @@ namespace WebHotels.Domain.Entities
 
             [ForeignKey("Hotel")]
             public int HotelId { get; set; }
+            
+            [ValidateNever]
             public Hotel Hotel{ get; set; }
             public string? SpecialDetails { get; set; }
     }
