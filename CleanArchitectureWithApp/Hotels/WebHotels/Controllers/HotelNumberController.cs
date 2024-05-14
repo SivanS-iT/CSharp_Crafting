@@ -37,17 +37,30 @@ namespace WebHotels.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(HotelNumber obj)
+        public IActionResult Create(HotelNumberVM obj)
         {
-            if (ModelState.IsValid)
-            {
-                _db.HotelNumbers.Add(obj);
-                _db.SaveChanges();
-                TempData["success"] = "The hotel number has been added successfully.";
+            bool roomNumberExists = _db.HotelNumbers.Any(u => u.Hotel_Number == obj.HotelNumber.Hotel_Number);
 
+            if (ModelState.IsValid && !roomNumberExists)
+            {
+                _db.HotelNumbers.Add(obj.HotelNumber);
+                _db.SaveChanges();
+                TempData["success"] = "The villa Number has been created successfully.";
                 return RedirectToAction("Index");
             }
-            return View();
+
+            if (roomNumberExists)
+            {
+                TempData["error"] = "The villa Number already exists.";
+            }
+
+            obj.HotelList = _db.Hotels.ToList().Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            });
+
+            return View(obj);
         }
 
 
