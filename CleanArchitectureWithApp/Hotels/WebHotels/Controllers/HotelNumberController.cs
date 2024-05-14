@@ -26,6 +26,7 @@ namespace WebHotels.Web.Controllers
         {
             HotelNumberVM hotelNumberVM = new()
             {
+                // selectig just these parameters
                 HotelList = _db.Hotels.ToList().Select(u => new SelectListItem
                 {
                     Text = u.Name,
@@ -64,60 +65,80 @@ namespace WebHotels.Web.Controllers
         }
 
 
-        public IActionResult Update(int hotelId)
+        public IActionResult Update(int hotelNumberId)
         {
-            Hotel? obj = _db.Hotels.FirstOrDefault(u => u.Id == hotelId);
-            if (obj == null)
+            HotelNumberVM hotelNumberVM = new()
+            {
+                HotelList = _db.Hotels.ToList().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                }),
+                HotelNumber = _db.HotelNumbers.FirstOrDefault(u => u.Hotel_Number == hotelNumberId)
+            };
+
+            if (hotelNumberVM.HotelNumber == null)
             {
                 return RedirectToAction("Error", "Home");
             }
-            return View(obj);
+            return View(hotelNumberVM);
         }
 
         [HttpPost]
-        public IActionResult Update(Hotel obj)
+        public IActionResult Update(HotelNumberVM hotelNumberVM)
         {
-            if (ModelState.IsValid && obj.Id > 0)
+            if (ModelState.IsValid)
             {
-                _db.Hotels.Update(obj);
+                _db.HotelNumbers.Update(hotelNumberVM.HotelNumber);
                 _db.SaveChanges();
-                TempData["success"] = "The hotel has been updated successfully.";
-
+                TempData["success"] = "The villa Number has been updated successfully.";
                 return RedirectToAction("Index");
             }
-            return View();
+
+            hotelNumberVM.HotelList = _db.Hotels.ToList().Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            });
+
+            return View(hotelNumberVM);
         }
 
 
-        /// <summary>
-        /// Delete get endpoint
-        /// </summary>
-        /// <param name="hotelId"></param>
-        /// <returns></returns>
-        public IActionResult Delete(int hotelId)
+
+        public IActionResult Delete(int hotelNumberId)
         {
-            Hotel? obj = _db.Hotels.FirstOrDefault(u => u.Id == hotelId);
-            if (obj == null)
+            HotelNumberVM hotelNumberVM = new()
+            {
+                HotelList = _db.Hotels.ToList().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                }),
+                HotelNumber = _db.HotelNumbers.FirstOrDefault(u => u.Hotel_Number == hotelNumberId)
+            };
+
+            if (hotelNumberVM.HotelNumber == null)
             {
                 return RedirectToAction("Error", "Home");
             }
-            return View(obj);
+            return View(hotelNumberVM);
         }
 
         [HttpPost]
-        public IActionResult Delete(Hotel obj)
+        public IActionResult Delete(HotelNumberVM hotelNumberVM)
         {
-            Hotel? objForDelete = _db.Hotels.FirstOrDefault(u => u.Id == obj.Id);
+            HotelNumber? objForDelete = _db.HotelNumbers.FirstOrDefault(u => u.Hotel_Number == hotelNumberVM.HotelNumber.Hotel_Number);
 
             if (objForDelete is not null)
             {
-                _db.Hotels.Remove(objForDelete);
+                _db.HotelNumbers.Remove(objForDelete);
                 _db.SaveChanges();
-                TempData["success"] = "The hotel has been deleted successfully.";
+                TempData["success"] = "The hotelNUmber has been deleted successfully.";
 
                 return RedirectToAction("Index");
             }
-            TempData["error"] = "Hotel could not be deleted";
+            TempData["error"] = "Hotel number could not be deleted";
             return View();
         }
 
