@@ -47,7 +47,7 @@ namespace WebHotels.Web.Controllers
                 _db.HotelNumbers.Add(obj.HotelNumber);
                 _db.SaveChanges();
                 TempData["success"] = "The villa Number has been created successfully.";
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
 
             if (roomNumberExists)
@@ -92,7 +92,7 @@ namespace WebHotels.Web.Controllers
                 _db.HotelNumbers.Update(hotelNumberVM.HotelNumber);
                 _db.SaveChanges();
                 TempData["success"] = "The villa Number has been updated successfully.";
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
 
             hotelNumberVM.HotelList = _db.Hotels.ToList().Select(u => new SelectListItem
@@ -136,7 +136,7 @@ namespace WebHotels.Web.Controllers
                 _db.SaveChanges();
                 TempData["success"] = "The hotelNUmber has been deleted successfully.";
 
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             TempData["error"] = "Hotel number could not be deleted";
             return View();

@@ -38,7 +38,7 @@ namespace WebHotels.Web.Controllers
                 _db.SaveChanges();
                 TempData["success"] = "The hotel has been added successfully.";
 
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             return View();
         }
@@ -63,7 +63,7 @@ namespace WebHotels.Web.Controllers
                 _db.SaveChanges();
                 TempData["success"] = "The hotel has been updated successfully.";
 
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             return View();
         }
@@ -95,7 +95,7 @@ namespace WebHotels.Web.Controllers
                 _db.SaveChanges();
                 TempData["success"] = "The hotel has been deleted successfully.";
 
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             TempData["error"] = "Hotel could not be deleted";
             return View();
