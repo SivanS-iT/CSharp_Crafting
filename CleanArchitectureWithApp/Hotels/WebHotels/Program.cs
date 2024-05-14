@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using WebHotels.Application.Common.Interfaces;
 using WebHotels.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(option=>
 option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); 
-
+builder.Services.AddScoped<IHotelRepository, IHotelRepository>();
 
 var app = builder.Build();
 
