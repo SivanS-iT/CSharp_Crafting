@@ -1,4 +1,4 @@
-﻿@model HotelNumber
+﻿@model HotelNumberVM
 
 
 <div class="w-100 card border-0 p-4">
@@ -14,21 +14,21 @@
             <div class="p-3">
                 @* asp-for="@Model.Name"  *@
                 <div class="form-floating py-1 col-12">
-                    <select asp-for="@Model.HotelId" asp-items="@ViewBag.HotelList as IEnumerable<SelectListItem>" class="form-select border shadow">
+                    <select asp-for="@Model.HotelNumber.HotelId" asp-items="@Model.HotelList" class="form-select border shadow">
                         <option disabled selected>--Select Hotel--</option>
                     </select>
-                    <label asp-for="HotelId" class="ms-2"></label>
-                    <span asp-validation-for="HotelId" class="text-danger"></span>
+                    <label asp-for="HotelNumber.HotelId" class="ms-2"></label>
+                    <span asp-validation-for="HotelNumber.HotelId" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="Hotel_Number" class="form-control border shadow" />
-                    <label asp-for="Hotel_Number" class="ms-2"></label>
-                    <span asp-validation-for="Hotel_Number" class="text-danger"></span>
+                    <input asp-for="HotelNumber.Hotel_Number" class="form-control border shadow" />
+                    <label asp-for="HotelNumber.Hotel_Number" class="ms-2"></label>
+                    <span asp-validation-for="HotelNumber.Hotel_Number" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="SpecialDetails" class="form-control border shadow" />
-                    <label asp-for="SpecialDetails" class="ms-2"></label>
-                    <span asp-validation-for="SpecialDetails" class="text-danger"></span>
+                    <input asp-for="HotelNumber.SpecialDetails" class="form-control border shadow" />
+                    <label asp-for="HotelNumber.SpecialDetails" class="ms-2"></label>
+                    <span asp-validation-for="HotelNumber.SpecialDetails" class="text-danger"></span>
                 </div>
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">

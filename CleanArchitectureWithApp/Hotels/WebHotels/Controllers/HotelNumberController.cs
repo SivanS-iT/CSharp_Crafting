@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using WebHotels.Domain.Entities;
 using WebHotels.Infrastructure.Data;
+using WebHotels.Web.ViewModels;
 
 namespace WebHotels.Web.Controllers
 {
@@ -22,14 +23,16 @@ namespace WebHotels.Web.Controllers
         }
         public IActionResult Create()
         {
-            IEnumerable<SelectListItem> list = _db.Hotels.ToList().Select(u => new SelectListItem
+            HotelNumberVM hotelNumberVM = new()
             {
-                Text = u.Name,
-                Value = u.Id.ToString()
-            });
+                HotelList = _db.Hotels.ToList().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                })
+            };
 
-            ViewBag.HotelList = list;
-            return View();
+            return View(hotelNumberVM);
         }
 
         [HttpPost]
