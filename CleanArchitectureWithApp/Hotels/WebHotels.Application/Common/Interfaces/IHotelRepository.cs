@@ -8,13 +8,9 @@ using WebHotels.Domain.Entities;
 
 namespace WebHotels.Application.Common.Interfaces
 {
-    public interface IHotelRepository
+    public interface IHotelRepository : IRepository<Hotel>
     {
-        IEnumerable<Hotel> GetAll(Expression<Func<Hotel, bool>>? filter = null, string? includeProperties = null, bool tracked = false);
-        Hotel Get(Expression<Func<Hotel, bool>> filter, string? includeProperties = null, bool tracked = false);
-        void Add(Hotel entity);
         void Update(Hotel entity);
-        void Remove(Hotel entity);
         void Save();
     }
 }
