@@ -2,24 +2,26 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using WebHotels.Application.Common.Interfaces;
 using WebHotels.Domain.Entities;
 using WebHotels.Infrastructure.Data;
+using WebHotels.Infrastructure.Repository;
 using WebHotels.Web.ViewModels;
 
 namespace WebHotels.Web.Controllers
 {
     public class HotelNumberController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HotelNumberController(ApplicationDbContext db)
+        public HotelNumberController(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            var hotelsNumbers = _db.HotelNumbers.Include(u => u.Hotel).ToList();
+            var hotelsNumbers = _unitOfWork.HotelNumber.GetAll(includeProperties: "Hotel");
             return View(hotelsNumbers);
         }
         public IActionResult Create()
@@ -27,7 +29,7 @@ namespace WebHotels.Web.Controllers
             HotelNumberVM hotelNumberVM = new()
             {
                 // selectig just these parameters
-                HotelList = _db.Hotels.ToList().Select(u => new SelectListItem
+                HotelList = _unitOfWork.Hotel.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Name,
                     Value = u.Id.ToString()
@@ -40,12 +42,12 @@ namespace WebHotels.Web.Controllers
         [HttpPost]
         public IActionResult Create(HotelNumberVM obj)
         {
-            bool roomNumberExists = _db.HotelNumbers.Any(u => u.Hotel_Number == obj.HotelNumber.Hotel_Number);
+            bool roomNumberExists = _unitOfWork.HotelNumber.Any(u => u.Hotel_Number == obj.HotelNumber.Hotel_Number);
 
             if (ModelState.IsValid && !roomNumberExists)
             {
-                _db.HotelNumbers.Add(obj.HotelNumber);
-                _db.SaveChanges();
+                _unitOfWork.HotelNumber.Add(obj.HotelNumber);
+                _unitOfWork.Save();
                 TempData["success"] = "The villa Number has been created successfully.";
                 return RedirectToAction(nameof(Index));
             }
@@ -55,7 +57,7 @@ namespace WebHotels.Web.Controllers
                 TempData["error"] = "The villa Number already exists.";
             }
 
-            obj.HotelList = _db.Hotels.ToList().Select(u => new SelectListItem
+            obj.HotelList = _unitOfWork.Hotel.GetAll().Select(u => new SelectListItem
             {
                 Text = u.Name,
                 Value = u.Id.ToString()
@@ -69,12 +71,12 @@ namespace WebHotels.Web.Controllers
         {
             HotelNumberVM hotelNumberVM = new()
             {
-                HotelList = _db.Hotels.ToList().Select(u => new SelectListItem
+                HotelList = _unitOfWork.Hotel.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Name,
                     Value = u.Id.ToString()
                 }),
-                HotelNumber = _db.HotelNumbers.FirstOrDefault(u => u.Hotel_Number == hotelNumberId)
+                HotelNumber = _unitOfWork.HotelNumber.Get(u => u.Hotel_Number == hotelNumberId)
             };
 
             if (hotelNumberVM.HotelNumber == null)
@@ -89,13 +91,13 @@ namespace WebHotels.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.HotelNumbers.Update(hotelNumberVM.HotelNumber);
-                _db.SaveChanges();
+                _unitOfWork.HotelNumber.Update(hotelNumberVM.HotelNumber);
+                _unitOfWork.Save();
                 TempData["success"] = "The villa Number has been updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
 
-            hotelNumberVM.HotelList = _db.Hotels.ToList().Select(u => new SelectListItem
+            hotelNumberVM.HotelList = _unitOfWork.Hotel.GetAll().Select(u => new SelectListItem
             {
                 Text = u.Name,
                 Value = u.Id.ToString()
@@ -110,12 +112,12 @@ namespace WebHotels.Web.Controllers
         {
             HotelNumberVM hotelNumberVM = new()
             {
-                HotelList = _db.Hotels.ToList().Select(u => new SelectListItem
+                HotelList = _unitOfWork.Hotel.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Name,
                     Value = u.Id.ToString()
                 }),
-                HotelNumber = _db.HotelNumbers.FirstOrDefault(u => u.Hotel_Number == hotelNumberId)
+                HotelNumber = _unitOfWork.HotelNumber.Get(u => u.Hotel_Number == hotelNumberId)
             };
 
             if (hotelNumberVM.HotelNumber == null)
@@ -128,12 +130,12 @@ namespace WebHotels.Web.Controllers
         [HttpPost]
         public IActionResult Delete(HotelNumberVM hotelNumberVM)
         {
-            HotelNumber? objForDelete = _db.HotelNumbers.FirstOrDefault(u => u.Hotel_Number == hotelNumberVM.HotelNumber.Hotel_Number);
+            HotelNumber? objForDelete = _unitOfWork.HotelNumber.Get(u => u.Hotel_Number == hotelNumberVM.HotelNumber.Hotel_Number);
 
             if (objForDelete is not null)
             {
-                _db.HotelNumbers.Remove(objForDelete);
-                _db.SaveChanges();
+                _unitOfWork.HotelNumber.Remove(objForDelete);
+                _unitOfWork.Save();
                 TempData["success"] = "The hotelNUmber has been deleted successfully.";
 
                 return RedirectToAction(nameof(Index));

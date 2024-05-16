@@ -12,10 +12,13 @@ namespace WebHotels.Infrastructure.Repository
     {
         private readonly ApplicationDbContext _db;
         public IHotelRepository Hotel{ get; private set; }
+        public IHotelNumberRepository HotelNumber { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Hotel = new HotelRepository(_db);
+            HotelNumber = new HotelNumberRepository(_db);
         }
 
         public void Save()
