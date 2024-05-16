@@ -11,7 +11,7 @@ namespace WebHotels.Application.Common.Interfaces
     public interface IHotelRepository
     {
         IEnumerable<Hotel> GetAll(Expression<Func<Hotel, bool>>? filter = null, string? includeProperties = null, bool tracked = false);
-        IEnumerable<Hotel> Get(Expression<Func<Hotel, bool>> filter, string? includeProperties = null, bool tracked = false);
+        Hotel Get(Expression<Func<Hotel, bool>> filter, string? includeProperties = null, bool tracked = false);
         void Add(Hotel entity);
         void Update(Hotel entity);
         void Remove(Hotel entity);
