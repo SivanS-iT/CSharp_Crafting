@@ -9,5 +9,6 @@ namespace WebHotels.Application.Common.Interfaces
     public interface IUnitOfWork
     {
         IHotelRepository Hotel { get; }
+        void Save();
     }
 }

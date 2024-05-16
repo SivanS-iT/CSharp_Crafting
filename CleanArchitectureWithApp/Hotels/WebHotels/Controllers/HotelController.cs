@@ -36,7 +36,7 @@ namespace WebHotels.Web.Controllers
             if (ModelState.IsValid)
             {
                 _unitOfWork.Hotel.Add(obj);
-                _unitOfWork.Hotel.Save();
+                _unitOfWork.Save();
                 TempData["success"] = "The hotel has been added successfully.";
 
                 return RedirectToAction(nameof(Index));
@@ -61,7 +61,7 @@ namespace WebHotels.Web.Controllers
             if (ModelState.IsValid && obj.Id > 0)
             {
                 _unitOfWork.Hotel.Update(obj);
-                _unitOfWork.Hotel.Save();
+                _unitOfWork.Save();
                 TempData["success"] = "The hotel has been updated successfully.";
 
                 return RedirectToAction(nameof(Index));
@@ -93,7 +93,7 @@ namespace WebHotels.Web.Controllers
             if (objForDelete is not null)
             {
                 _unitOfWork.Hotel.Remove(objForDelete);
-                _unitOfWork.Hotel.Save();
+                _unitOfWork.Save();
                 TempData["success"] = "The hotel has been deleted successfully.";
 
                 return RedirectToAction(nameof(Index));

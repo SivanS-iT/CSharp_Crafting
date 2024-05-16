@@ -11,6 +11,5 @@ namespace WebHotels.Application.Common.Interfaces
     public interface IHotelRepository : IRepository<Hotel>
     {
         void Update(Hotel entity);
-        void Save();
     }
 }

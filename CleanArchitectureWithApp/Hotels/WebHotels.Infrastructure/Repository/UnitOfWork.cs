@@ -17,5 +17,10 @@ namespace WebHotels.Infrastructure.Repository
             _db = db;
             Hotel = new HotelRepository(_db);
         }
+
+        public void Save()
+        {
+            _db.SaveChanges();
+        }
     }
 }
