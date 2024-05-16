@@ -11,7 +11,7 @@ using WebHotels.Infrastructure.Data;
 
 namespace WebHotels.Infrastructure.Repository
 {
-    internal class HotelRepository : IHotelRepository
+    public class HotelRepository : IHotelRepository
     {
         private readonly ApplicationDbContext _db;
 

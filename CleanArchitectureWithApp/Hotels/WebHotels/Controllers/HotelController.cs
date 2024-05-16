@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using WebHotels.Application.Common.Interfaces;
 using WebHotels.Domain.Entities;
 using WebHotels.Infrastructure.Data;
 
@@ -7,16 +8,16 @@ namespace WebHotels.Web.Controllers
 {
     public class HotelController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly IHotelRepository _hotelRepo;
 
-        public HotelController(ApplicationDbContext db)
+        public HotelController(IHotelRepository hotelRepo)
         {
-            _db = db;
+            _hotelRepo = hotelRepo;
         }
 
         public IActionResult Index()
         {
-            var hotels = _db.Hotels.ToList();
+            var hotels = _hotelRepo.GetAll();
             return View(hotels);
         }
         public IActionResult Create()
@@ -34,8 +35,8 @@ namespace WebHotels.Web.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Hotels.Add(obj);
-                _db.SaveChanges();
+                _hotelRepo.Add(obj);
+                _hotelRepo.Save();
                 TempData["success"] = "The hotel has been added successfully.";
 
                 return RedirectToAction(nameof(Index));
@@ -46,7 +47,7 @@ namespace WebHotels.Web.Controllers
 
         public IActionResult Update(int hotelId)
         {
-            Hotel? obj = _db.Hotels.FirstOrDefault(u => u.Id == hotelId);
+            Hotel? obj = _hotelRepo.Get(u => u.Id == hotelId);
             if (obj == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -59,8 +60,8 @@ namespace WebHotels.Web.Controllers
         {
             if (ModelState.IsValid && obj.Id > 0)
             {
-                _db.Hotels.Update(obj);
-                _db.SaveChanges();
+                _hotelRepo.Update(obj);
+                _hotelRepo.Save();
                 TempData["success"] = "The hotel has been updated successfully.";
 
                 return RedirectToAction(nameof(Index));
@@ -76,7 +77,7 @@ namespace WebHotels.Web.Controllers
         /// <returns></returns>
         public IActionResult Delete(int hotelId)
         {
-            Hotel? obj = _db.Hotels.FirstOrDefault(u => u.Id == hotelId);
+            Hotel? obj = _hotelRepo.Get(u => u.Id == hotelId);
             if (obj == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -87,12 +88,12 @@ namespace WebHotels.Web.Controllers
         [HttpPost]
         public IActionResult Delete(Hotel obj)
         {
-            Hotel? objForDelete = _db.Hotels.FirstOrDefault(u => u.Id == obj.Id);
+            Hotel? objForDelete = _hotelRepo.Get(u => u.Id == obj.Id);
 
             if (objForDelete is not null)
             {
-                _db.Hotels.Remove(objForDelete);
-                _db.SaveChanges();
+                _hotelRepo.Remove(objForDelete);
+                _hotelRepo.Save();
                 TempData["success"] = "The hotel has been deleted successfully.";
 
                 return RedirectToAction(nameof(Index));
