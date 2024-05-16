@@ -9,10 +9,12 @@ namespace WebHotels.Web.Controllers
     public class HotelController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public HotelController(IUnitOfWork unitOfWork)
+        public HotelController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -35,6 +37,23 @@ namespace WebHotels.Web.Controllers
             }
             if (ModelState.IsValid)
             {
+
+                if (obj.Image != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(obj.Image.FileName);
+                    string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, @"images\HotelImage");
+
+                    using var fileStream = new FileStream(Path.Combine(imagePath, fileName), FileMode.Create);
+                    obj.Image.CopyTo(fileStream);
+
+                    obj.ImageUrl = @"\images\HotelImage\" + fileName;
+                }
+                else
+                {
+                    obj.ImageUrl = "https://placehold.co/600x400";
+                }
+
+
                 _unitOfWork.Hotel.Add(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "The hotel has been added successfully.";

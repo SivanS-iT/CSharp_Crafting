@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace WebHotels.Domain.Entities
 {
@@ -20,8 +21,9 @@ namespace WebHotels.Domain.Entities
         public int Sqft { get; set; }
         [Range(1, 10)]
         public int Occupancy { get; set; }
+        [NotMapped]
+        public IFormFile Image { get; set; }
         [Display(Name = "Image url")]
-
         public string? ImageUrl { get; set; }
         public DateTime? Created_Date { get; set; }
         public DateTime? Updated_Date { get; set; }
