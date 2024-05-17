@@ -79,6 +79,27 @@ namespace WebHotels.Web.Controllers
         {
             if (ModelState.IsValid && obj.Id > 0)
             {
+                if (obj.Image != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(obj.Image.FileName);
+                    string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, @"images\HotelImage");
+
+                    if (!string.IsNullOrEmpty(obj.ImageUrl))
+                    {
+                        var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, obj.ImageUrl.TrimStart('\\'));
+
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
+                    using var fileStream = new FileStream(Path.Combine(imagePath, fileName), FileMode.Create);
+                    obj.Image.CopyTo(fileStream);
+
+                    obj.ImageUrl = @"\images\HotelImage\" + fileName;   
+                }
+
                 _unitOfWork.Hotel.Update(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "The hotel has been updated successfully.";
@@ -111,6 +132,16 @@ namespace WebHotels.Web.Controllers
 
             if (objForDelete is not null)
             {
+                if (!string.IsNullOrEmpty(objForDelete.ImageUrl))
+                {
+                    var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, objForDelete.ImageUrl.TrimStart('\\'));
+
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
                 _unitOfWork.Hotel.Remove(objForDelete);
                 _unitOfWork.Save();
                 TempData["success"] = "The hotel has been deleted successfully.";

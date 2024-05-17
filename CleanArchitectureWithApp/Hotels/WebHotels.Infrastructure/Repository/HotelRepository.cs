@@ -11,18 +11,18 @@ using WebHotels.Infrastructure.Data;
 
 namespace WebHotels.Infrastructure.Repository
 {
-    public class HotelNumberRepository : Repository<HotelNumber>, IHotelNumberRepository
+    public class HotelRepository : Repository<Hotel>, IHotelRepository
     {
         private readonly ApplicationDbContext _db;
 
-        public HotelNumberRepository(ApplicationDbContext db) : base(db)
+        public HotelRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
 
-        public void Update(HotelNumber entity)
+        public void Update(Hotel entity)
         {
-            _db.HotelNumbers.Update(entity);
+            _db.Hotels.Update(entity);
         }
     }
 }
