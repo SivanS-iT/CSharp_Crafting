@@ -28,14 +28,23 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Hotel" asp-action="Index">Hotel</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="HotelNumber" asp-action="Index">HotelNumbers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Amenity" asp-action="Index">Amenity</a>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Content Management
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Hotel" asp-action="Index">Hotel</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="HotelNumber" asp-action="Index">HotelNumber</a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Amenity" asp-action="Index">Amenity</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
