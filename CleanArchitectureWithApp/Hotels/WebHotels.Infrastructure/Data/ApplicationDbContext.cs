@@ -18,6 +18,8 @@ namespace WebHotels.Infrastructure.Data
 
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<HotelNumber> HotelNumbers { get; set; }
+        public DbSet<Amenity> Amenities { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -101,6 +103,68 @@ namespace WebHotels.Infrastructure.Data
                         Hotel_Number = 302,
                         HotelId = 3,
                     });
+
+            modelBuilder.Entity<Amenity>().HasData(
+          new Amenity
+          {
+              Id = 1,
+              HotelId = 1,
+              Name = "Private Pool"
+          }, new Amenity
+          {
+              Id = 2,
+              HotelId = 1,
+              Name = "Microwave"
+          }, new Amenity
+          {
+              Id = 3,
+              HotelId = 1,
+              Name = "Private Balcony"
+          }, new Amenity
+          {
+              Id = 4,
+              HotelId = 1,
+              Name = "1 king bed and 1 sofa bed"
+          },
+
+          new Amenity
+          {
+              Id = 5,
+              HotelId = 2,
+              Name = "Private Plunge Pool"
+          }, new Amenity
+          {
+              Id = 6,
+              HotelId = 2,
+              Name = "Microwave and Mini Refrigerator"
+          }, new Amenity
+          {
+              Id = 7,
+              HotelId = 2,
+              Name = "Private Balcony"
+          }, new Amenity
+          {
+              Id = 8,
+              HotelId = 2,
+              Name = "king bed or 2 double beds"
+          },
+
+          new Amenity
+          {
+              Id = 9,
+              HotelId = 3,
+              Name = "Private Pool"
+          }, new Amenity
+          {
+              Id = 10,
+              HotelId = 3,
+              Name = "Jacuzzi"
+          }, new Amenity
+          {
+              Id = 11,
+              HotelId = 3,
+              Name = "Private Balcony"
+          });
 
         }
     }
