@@ -44,7 +44,7 @@ namespace WebHotels.Infrastructure.Migrations
 
                     b.HasIndex("HotelId");
 
-                    b.ToTable("Amenities");
+                    b.ToTable("Amenities", (string)null);
 
                     b.HasData(
                         new
@@ -151,7 +151,7 @@ namespace WebHotels.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Hotels");
+                    b.ToTable("Hotels", (string)null);
 
                     b.HasData(
                         new
@@ -201,7 +201,7 @@ namespace WebHotels.Infrastructure.Migrations
 
                     b.HasIndex("HotelId");
 
-                    b.ToTable("HotelNumbers");
+                    b.ToTable("HotelNumbers", (string)null);
 
                     b.HasData(
                         new
