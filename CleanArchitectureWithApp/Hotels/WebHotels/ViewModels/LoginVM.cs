@@ -6,11 +6,14 @@ namespace WebHotels.Web.ViewModels
     {
         [Required]
         public string Email { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        public string RememberMe { get; set; }
-        public string RedirectUrl { get; set; }
+
+        public bool RememberMe { get; set; }
+
+        public string? RedirectUrl { get; set; }
 
     }
 }
