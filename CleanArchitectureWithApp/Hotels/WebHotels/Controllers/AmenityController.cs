@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using WebHotels.Application.Common.Interfaces;
+using WebHotels.Application.Common.Utility;
 using WebHotels.Domain.Entities;
 using WebHotels.Infrastructure.Data;
 using WebHotels.Infrastructure.Repository;
@@ -10,6 +12,7 @@ using WebHotels.Web.ViewModels;
 
 namespace WebHotels.Web.Controllers
 {
+    [Authorize(Roles = SD.Role_Admin)]
     public class AmenityController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using WebHotels.Application.Common.Interfaces;
 using WebHotels.Domain.Entities;
@@ -6,6 +7,7 @@ using WebHotels.Infrastructure.Data;
 
 namespace WebHotels.Web.Controllers
 {
+    [Authorize]
     public class HotelController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

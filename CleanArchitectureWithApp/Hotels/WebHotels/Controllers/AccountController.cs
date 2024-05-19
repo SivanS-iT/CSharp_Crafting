@@ -23,7 +23,10 @@ namespace WebHotels.Web.Controllers
             _signInManager = signInManager;
         }
 
-
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
 
         public IActionResult Login(string returnUrl = null)
         {
