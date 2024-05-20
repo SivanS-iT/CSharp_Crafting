@@ -41,6 +41,29 @@ namespace WebHotels.Controllers
         }
 
 
+        public IActionResult GetVillasByDate(int nights, DateOnly checkInDate)
+        {
+            var hotelList = _unitOfWork.Hotel.GetAll(includeProperties: "HotelAmenity").ToList();
+            foreach (var hotel in hotelList)
+            {
+                if (hotel.Id % 2 == 0)
+                {
+                    hotel.IsAvailable = false;
+                }
+            }
+
+            HomeVM homeVM = new()
+            {
+                CheckInDate = checkInDate,
+                HotelList = hotelList,
+                Nights = nights
+            };
+
+            return View(homeVM);
+        }
+
+
+
         public IActionResult Privacy()
         {
             return View();
