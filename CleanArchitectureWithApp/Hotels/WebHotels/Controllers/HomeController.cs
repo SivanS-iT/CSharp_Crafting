@@ -59,7 +59,7 @@ namespace WebHotels.Controllers
                 Nights = nights
             };
 
-            return View(homeVM);
+            return PartialView("_hotelList", homeVM);
         }
 
 
