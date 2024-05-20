@@ -41,7 +41,7 @@ namespace WebHotels.Controllers
         }
 
 
-        public IActionResult GetVillasByDate(int nights, DateOnly checkInDate)
+        public IActionResult GetHotelsByDate(int nights, DateOnly checkInDate)
         {
             var hotelList = _unitOfWork.Hotel.GetAll(includeProperties: "HotelAmenity").ToList();
             foreach (var hotel in hotelList)
