@@ -31,7 +31,7 @@ namespace WebHotels.Domain.Entities
         [ValidateNever]
         public IEnumerable<Amenity> HotelAmenity { get; set; }
 
-        //[NotMapped]
-        //public bool IsAvailable { get; set; } = true;
+        [NotMapped]
+        public bool IsAvailable { get; set; } = true;
     }
 }

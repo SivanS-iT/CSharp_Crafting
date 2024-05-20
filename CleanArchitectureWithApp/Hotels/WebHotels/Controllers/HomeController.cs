@@ -26,6 +26,21 @@ namespace WebHotels.Controllers
             return View(homeVM);
         }
 
+        [HttpPost]
+        public IActionResult Index(HomeVM homeVM)
+        {
+            homeVM.HotelList = _unitOfWork.Hotel.GetAll(includeProperties: "HotelAmenity");
+            foreach (var hotel in homeVM.HotelList)
+            {
+                if (hotel.Id % 2 == 0)
+                {
+                    hotel.IsAvailable = false;
+                }
+            }
+            return View(homeVM);
+        }
+
+
         public IActionResult Privacy()
         {
             return View();
