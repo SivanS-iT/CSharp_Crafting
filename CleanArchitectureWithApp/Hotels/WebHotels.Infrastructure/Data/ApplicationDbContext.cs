@@ -21,6 +21,8 @@ namespace WebHotels.Infrastructure.Data
         public DbSet<HotelNumber> HotelNumbers { get; set; }
         public DbSet<Amenity> Amenities { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Booking> Bookings{ get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

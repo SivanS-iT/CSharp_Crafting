@@ -10,6 +10,7 @@ namespace WebHotels.Application.Common.Interfaces
     {
         IHotelRepository Hotel { get; }
         IHotelNumberRepository HotelNumber { get; }
+        IBookingRepository Booking { get; }
         IAmenityRepository Amenity  { get; }
 
 
