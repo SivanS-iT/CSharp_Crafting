@@ -22,7 +22,7 @@ namespace WebHotels.Web.Controllers
                 Nights = nights,
                 CheckOutDate = checkInDater.AddDays(nights),
             };
-
+            booking.TotalCost = booking.Hotel.Price * nights;
             return View(booking);
         }
     }
