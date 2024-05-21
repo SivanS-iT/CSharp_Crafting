@@ -14,7 +14,7 @@ namespace WebHotels.Infrastructure.Repository
         public IHotelRepository Hotel{ get; private set; }
         public IHotelNumberRepository HotelNumber { get; private set; }
         public IBookingRepository Booking { get; private set; }
-        public IApplicationUserRepository ApplicationUser { get; private set; }
+        public IApplicationUserRepository User { get; private set; }
         public IAmenityRepository Amenity { get; private set; }
 
 
@@ -24,7 +24,7 @@ namespace WebHotels.Infrastructure.Repository
             Hotel = new HotelRepository(_db);
             HotelNumber = new HotelNumberRepository(_db);
             Booking = new BookingRepository(_db);
-            ApplicationUser = new ApplicationUserRepository(_db);
+            User = new ApplicationUserRepository(_db);
             Amenity = new AmenityRepository(_db);
         }
 

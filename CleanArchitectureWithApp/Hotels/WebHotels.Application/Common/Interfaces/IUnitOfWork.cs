@@ -11,7 +11,7 @@ namespace WebHotels.Application.Common.Interfaces
         IHotelRepository Hotel { get; }
         IHotelNumberRepository HotelNumber { get; }
         IBookingRepository Booking { get; }
-        IApplicationUserRepository ApplicationUser { get; }
+        IApplicationUserRepository User { get; }
         IAmenityRepository Amenity  { get; }
 
 
