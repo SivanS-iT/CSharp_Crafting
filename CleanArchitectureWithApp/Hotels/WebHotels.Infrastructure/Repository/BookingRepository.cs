@@ -26,7 +26,7 @@ namespace WebHotels.Infrastructure.Repository
             _db.Bookings.Update(entity);
         }
 
-        public void UpdateStatus(int bookingId, string bookingStatus, int villaNumber)
+        public void UpdateStatus(int bookingId, string bookingStatus)
         {
             var bookingFromDb = _db.Bookings.FirstOrDefault(m => m.Id == bookingId);
             if (bookingFromDb != null)
