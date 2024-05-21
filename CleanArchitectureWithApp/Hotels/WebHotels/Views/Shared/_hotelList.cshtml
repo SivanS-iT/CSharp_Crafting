@@ -33,7 +33,10 @@
                                 {
                                     if (hotel.IsAvailable)
                                     {
-                                        <a class="btn btn-success form-control btn-block">
+                                        <a class="btn btn-success form-control btn-block"
+                                           asp-controller="Booking" asp-action="FinalizeBooking"
+                                           asp-route-hotelId="@hotel.Id" asp-route-checkInDater="@Model.CheckInDate"
+                                           asp-route-nights="@Model.Nights">
                                             Book
                                         </a>
                                     }

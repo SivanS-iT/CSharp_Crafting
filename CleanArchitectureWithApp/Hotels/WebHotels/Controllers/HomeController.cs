@@ -26,7 +26,7 @@ namespace WebHotels.Controllers
             return View(homeVM);
         }
 
-
+        [HttpPost]
         public IActionResult GetHotelsByDate(int nights, DateOnly checkInDate)
         {
             var hotelList = _unitOfWork.Hotel.GetAll(includeProperties: "HotelAmenity").ToList();

@@ -12,15 +12,15 @@ namespace WebHotels.Web.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult FinalizeBooking(int hotelId, DateOnly checkInDate, int nights)
-        {
+        public IActionResult FinalizeBooking(int hotelId, DateOnly checkInDater, int nights)
+            {
             Booking booking = new()
             {
                 HotelId = hotelId,
                 Hotel = _unitOfWork.Hotel.Get(u => u.Id == hotelId, includeProperties: "HotelAmenity"),
-                CheckInDate = checkInDate,
+                CheckInDate = checkInDater,
                 Nights = nights,
-                CheckOutDate = checkInDate.AddDays(nights),
+                CheckOutDate = checkInDater.AddDays(nights),
             };
 
             return View(booking);
