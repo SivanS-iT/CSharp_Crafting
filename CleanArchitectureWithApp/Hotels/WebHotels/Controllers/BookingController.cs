@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WebHotels.Application.Common.Interfaces;
+using WebHotels.Application.Common.Utility;
 using WebHotels.Domain.Entities;
 
 namespace WebHotels.Web.Controllers
@@ -37,6 +38,30 @@ namespace WebHotels.Web.Controllers
             };
             booking.TotalCost = booking.Hotel.Price * nights;
             return View(booking);
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult FinalizeBooking(Booking booking)
+        {
+
+            var hotel = _unitOfWork.Hotel.Get(u => u.Id == booking.HotelId);
+            booking.TotalCost = hotel.Price * booking.Nights;
+
+            booking.Status = SD.StatusPending;
+            booking.BookingDate = DateTime.Now;
+
+            _unitOfWork.Booking.Add(booking);
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(BookingConfirmation), new { bookingId = booking.Id });
+        }
+
+
+        [Authorize]
+        public IActionResult BookingConfirmation(int bookingId)
+        {
+            return View(bookingId);
         }
     }
 }
