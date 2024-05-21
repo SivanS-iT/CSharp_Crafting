@@ -17,6 +17,14 @@ namespace WebHotels.Web.Controllers
             _unitOfWork = unitOfWork;
         }
 
+
+        [Authorize]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+
         [Authorize]
         public IActionResult FinalizeBooking(int hotelId, DateOnly checkInDater, int nights)
         {
@@ -120,5 +128,32 @@ namespace WebHotels.Web.Controllers
 
             return View(bookingId);
         }
+
+
+        #region API Calls ----------------
+        [HttpGet]
+        [Authorize]
+        public IActionResult GetAll()
+        {
+            IEnumerable<Booking> objBookings;
+
+            if (User.IsInRole(SD.Role_Admin))
+            {
+                objBookings = _unitOfWork.Booking.GetAll(includeProperties: "User,Hotel");
+            }
+            else
+            {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                objBookings = _unitOfWork.Booking
+                    .GetAll(u => u.UserId == userId, includeProperties: "User,Hotel");
+            }
+            return Json(new { data = objBookings });
+        }
+
+        #endregion
+
+
     }
 }
