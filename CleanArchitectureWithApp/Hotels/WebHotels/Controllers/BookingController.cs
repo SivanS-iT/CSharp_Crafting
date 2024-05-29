@@ -129,6 +129,15 @@ namespace WebHotels.Web.Controllers
             return View(bookingId);
         }
 
+        [Authorize]
+        public IActionResult BookingDetails(int bookingId)
+        {
+            Booking bookingFromDb = _unitOfWork.Booking.Get(u => u.Id == bookingId,
+             includeProperties: "User,Hotel");
+
+            return View(bookingFromDb);
+        }
+
 
         #region API Calls ----------------
         [HttpGet]
