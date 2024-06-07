@@ -120,7 +120,7 @@ namespace WebHotels.Web.Controllers
 
                 if (session.PaymentStatus == "paid")
                 {
-                    _unitOfWork.Booking.UpdateStatus(bookingFromDb.Id, SD.StatusApproved);
+                    _unitOfWork.Booking.UpdateStatus(bookingFromDb.Id, SD.StatusApproved, 0);
                     _unitOfWork.Booking.UpdateStripePaymentID(bookingFromDb.Id, session.Id, session.PaymentIntentId);
                     _unitOfWork.Save();
                 }
@@ -134,8 +134,35 @@ namespace WebHotels.Web.Controllers
         {
             Booking bookingFromDb = _unitOfWork.Booking.Get(u => u.Id == bookingId,
              includeProperties: "User,Hotel");
+            
+            if (bookingFromDb.HotelNumber == 0 && bookingFromDb.Status == SD.StatusApproved)
+            {
+                var availableHotelNumber = AssignAvailableHotelNumberByHotel(bookingFromDb.HotelId);
 
+                bookingFromDb.HotelNumbers = _unitOfWork.HotelNumber.GetAll(u => u.HotelId == bookingFromDb.HotelId
+                && availableHotelNumber.Any(x => x == u.Hotel_Number)).ToList();
+            }
             return View(bookingFromDb);
+        }
+
+
+        private List<int> AssignAvailableHotelNumberByHotel(int hotelId)
+        {
+            List<int> availableHotelNumbers = new();
+
+            var hotelNumbers = _unitOfWork.HotelNumber.GetAll(u => u.HotelId == hotelId);
+
+            var checkedInHotel = _unitOfWork.Booking.GetAll(u => u.HotelId== hotelId && u.Status == SD.StatusCheckedIn)
+                .Select(u => u.HotelNumber);
+
+            foreach (var hotelNumber in hotelNumbers)
+            {
+                if (!checkedInHotel.Contains(hotelNumber.Hotel_Number))
+                {
+                    availableHotelNumbers.Add(hotelNumber.Hotel_Number);
+                }
+            }
+            return availableHotelNumbers;
         }
 
 

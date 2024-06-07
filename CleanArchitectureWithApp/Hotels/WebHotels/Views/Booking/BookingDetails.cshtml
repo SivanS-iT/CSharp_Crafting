@@ -84,7 +84,21 @@
                         <label class="text-warning">Actual Check-out Date</label>
                         <input asp-for="ActualCheckOutDate" disabled class="form-control" />
                     </div>
+                    @if (Model.Status == SD.StatusApproved && User.IsInRole(SD.Role_Admin))
+                    {
+                        <div class="form-group pt-2 col-6">
+                            <label class="text-danger" asp-for="HotelNumber"></label>
 
+                            <select class="form-select" asp-for="HotelNumber">
+                                @foreach (var item in Model.HotelNumbers)
+                                {
+                                    <option value="@item.Hotel_Number">@item.Hotel_Number</option>
+                                }
+                            </select>
+
+
+                        </div>
+                    }
                     @if(Model.IsPaymentSuccessful && User.IsInRole(SD.Role_Admin)){
                         <div class="form-group pt-2 col-6">
                             <label class="text-warning">Stripe PaymentIntent Id</label>

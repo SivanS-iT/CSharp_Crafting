@@ -51,5 +51,9 @@ namespace WebHotels.Domain.Entities
         public DateTime ActualCheckOutDate { get; set; }
 
         public int HotelNumber { get; set; }
+
+        [NotMapped]
+        public List<HotelNumber> HotelNumbers { get; set; }
+
     }
 }
