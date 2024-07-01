@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Implementation
 {
-    public class EmployeeRepo : IEmpoyee
+    public class EmployeeRepo : IEmployee
     {
         private readonly AppDbContext _appDbContext;
         public EmployeeRepo(AppDbContext appDbContext)

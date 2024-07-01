@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Contracts
 {
-    public interface IEmpoyee
+    public interface IEmployee
     {
         Task<ServiceResponse> AddAsync(Employee employee);
         Task<ServiceResponse> UpdateAsync(Employee employee);

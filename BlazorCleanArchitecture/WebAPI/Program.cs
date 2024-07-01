@@ -13,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(o=>o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IEmpoyee, EmployeeRepo>();
+builder.Services.AddScoped<IEmployee, EmployeeRepo>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
