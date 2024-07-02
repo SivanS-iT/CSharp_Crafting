@@ -1,7 +1,37 @@
 ﻿@page "/"
 
+@using Application.Services
+@using Domain.Entities
+@using NetcodeHub.Packages.Components.Validations.OnInput 
+@inject IEmployeeService emp
+
 <PageTitle>Home</PageTitle>
+<div class="row">
+    <div class="col-lg-6">
+        <EditForm Model="employee" OnValidSubmit="Save">
+            <DataAnnotationsValidator />
+                <FloatingText @bind-Value="employee.Name" 
+                        Label="Custom Fullname" 
+                        Placeholder="John Deer"
+                        class="form-control"/>
+            <ValidationMessage For="()=>employee. Name" />
 
-<h1>Hello, world!</h1>
+            <FloatingTextArea @bind-Value="employee.Address" 
+                        Label="Custom Address"
+                        Placeholder="eg.Wien,Austria"
+                        class="form-control mb-3" />
+            <ValidationMessage For="()=>employee.Address" />
 
-Welcome to your new app.
+            <button class="btn btn-primary mt-5 mb-5" type="submit">Save</button>
+        </EditForm>
+    </div>
+</div>
+
+@code{
+    Employee employee = new();
+
+    async Task Save()
+    {
+        var (flag, massage) = await emp.AddAsync(employee);
+    }
+}
