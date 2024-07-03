@@ -3,6 +3,10 @@
 @using Application.Services
 @using Domain.Entities
 @using NetcodeHub.Packages.Components.Validations.OnInput 
+@using Blazored.Toast
+@using Blazored.Toast.Services
+
+@inject IToastService toastService
 @inject IEmployeeService emp
 
 <PageTitle>Home</PageTitle>
@@ -28,10 +32,17 @@
 </div>
 
 @code{
+
     Employee employee = new();
 
     async Task Save()
     {
         var (flag, massage) = await emp.AddAsync(employee);
+        // if (!flag)
+        // {
+        //      toastService.ShowError("Not good");
+        //     return;
+        // }
+        //toastService.ShowSuccess("User created");
     }
 }
