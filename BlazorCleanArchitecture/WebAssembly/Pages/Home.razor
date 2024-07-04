@@ -1,5 +1,6 @@
 ﻿@page "/"
 
+@using Application.DTOs
 @using Application.Services
 @using Domain.Entities
 @using NetcodeHub.Packages.Components.Validations.OnInput 
@@ -29,6 +30,38 @@
             <button class="btn btn-primary mt-5 mb-5" type="submit">Save</button>
         </EditForm>
     </div>
+
+    <div class="col-lg-6">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>ADDRESS</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Employees is not null)
+                {
+                    foreach (var item in Employees)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.Address</td>
+                            <td>
+                                <button class="btn btn-info btn-sm" @onclick="() => EditClicked(item)">Edit</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" @onclick="() => DeleteClicked(item.Id)">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @code{
@@ -37,12 +70,32 @@
 
     async Task Save()
     {
-        var (flag, massage) = await emp.AddAsync(employee);
+        var response = new ServiceResponse(false, null!);
+        if (employee.Id > 0) 
+            response = await emp.UpdateAsync(employee);
+        else 
+            response = await emp.AddAsync(employee);
+
+
         // if (!flag)
         // {
         //      toastService.ShowError("Not good");
         //     return;
         // }
         //toastService.ShowSuccess("User created");
+        await GetData();
+    }
+
+    List<Employee> Employees = new();
+    protected override async Task OnInitializedAsync() => await GetData();
+    private async Task GetData() => Employees = await emp.GetAsync();
+
+
+    // Events -------------------------------------------------------------
+    void EditClicked(Employee incomEmp) => employee = incomEmp;
+    async void DeleteClicked(int id)
+    {
+        var (flag, massage) = await emp.DeleteAsync(id);
+        await GetData();
     }
 }
