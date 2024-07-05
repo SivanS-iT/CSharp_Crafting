@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] Employee employeeDto)
         {
-            var result = await _employee.UpdateAsync(employeeDto);
+            var result = await _mediator.Send(new UpdateEmployeeCommand { Employee = employeeDto });
             return Ok(result);
         }
 
