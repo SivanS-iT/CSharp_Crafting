@@ -1,5 +1,7 @@
 ﻿using Application.Contracts;
+using Application.Queries.EmployeeQuery;
 using Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,10 +13,12 @@ namespace WebAPI.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployee _employee;
+        private readonly IMediator _mediator;
 
-        public EmployeeController(IEmployee empoyee) 
+        public EmployeeController(IEmployee empoyee, IMediator mediator) 
         {
             this._employee = empoyee;
+            this._mediator = mediator;
         }
 
         /// <summary>
@@ -22,11 +26,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            var data = await _employee.GetAsync();
-            return Ok(data);
-        }
+        public async Task<IActionResult> Get() => Ok( await _mediator.Send(new GetEmployeeListQuery()));
 
         /// <summary>
         /// Get by ID
@@ -34,11 +34,7 @@ namespace WebAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var data = await _employee.GetByIdAsync(id);
-            return Ok(data);
-        }
+        public async Task<IActionResult> GetById(int id) => Ok( await _mediator.Send(new GetEmployeeByIdQuery { Id = id }));
 
         /// <summary>
         /// Add employee
