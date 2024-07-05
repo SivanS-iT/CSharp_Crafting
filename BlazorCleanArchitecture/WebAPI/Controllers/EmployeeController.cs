@@ -1,6 +1,8 @@
-﻿using Application.Contracts;
+﻿using Application.Commands;
+using Application.Contracts;
 using Application.Queries.EmployeeQuery;
 using Domain.Entities;
+using Infrastructure.Handlers.EmployeeHandler;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,7 +46,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] Employee employeeDto)
         {
-            var result = await _employee.AddAsync(employeeDto);
+            var result = await _mediator.Send(new CreateEmployeeCommand { Employee = employeeDto });
            return Ok(result);
         }
 
