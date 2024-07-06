@@ -3,6 +3,7 @@
 @using Application.DTOs
 @using Application.Services
 @using Domain.Entities
+
 @using NetcodeHub.Packages.Components.Validations.OnInput 
 @using Blazored.Toast
 @using Blazored.Toast.Services
@@ -65,8 +66,13 @@
 </div>
 
 @code{
+    // Toast POPUP ---------------------
+    void ShowSuccessToastPopup() => toastService.ShowSuccess("User has been added!");
+    void ShowFailToastPopup() => toastService.ShowError("Error on adding user!");
+    void ShowInfoToastPopup() => toastService.ShowInfo("User Deleted!");
 
     Employee employee = new();
+
 
     async Task Save()
     {
@@ -76,13 +82,13 @@
         else 
             response = await emp.AddAsync(employee);
 
+        if (!response.Flag)
+        {
+            ShowFailToastPopup();
+            return;
+        }
+        ShowSuccessToastPopup();
 
-        // if (!flag)
-        // {
-        //      toastService.ShowError("Not good");
-        //     return;
-        // }
-        //toastService.ShowSuccess("User created");
         await GetData();
     }
 
