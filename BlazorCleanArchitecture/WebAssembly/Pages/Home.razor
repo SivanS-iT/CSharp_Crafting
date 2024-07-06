@@ -76,13 +76,12 @@
         else 
             response = await emp.AddAsync(employee);
 
-
-        // if (!flag)
-        // {
-        //      toastService.ShowError("Not good");
-        //     return;
-        // }
-        //toastService.ShowSuccess("User created");
+        if (!response.Flag)
+        {
+             toastService.ShowError("Not good");
+            return;
+        }
+        toastService.ShowSuccess("User created");
         await GetData();
     }
 
@@ -97,5 +96,7 @@
     {
         var (flag, massage) = await emp.DeleteAsync(id);
         await GetData();
+        toastService.ShowInfo("User deleted!");
+        StateHasChanged();
     }
 }
