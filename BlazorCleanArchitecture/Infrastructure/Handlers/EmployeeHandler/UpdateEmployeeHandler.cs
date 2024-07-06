@@ -1,5 +1,4 @@
 ﻿using Application.Commands;
-using Application.Contracts;
 using Application.DTOs;
 using Application.Queries.EmployeeQuery;
 using Domain.Entities;

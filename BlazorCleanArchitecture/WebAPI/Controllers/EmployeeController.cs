@@ -1,5 +1,4 @@
 ﻿using Application.Commands;
-using Application.Contracts;
 using Application.Queries.EmployeeQuery;
 using Domain.Entities;
 using Infrastructure.Handlers.EmployeeHandler;
@@ -14,12 +13,10 @@ namespace WebAPI.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly IEmployee _employee;
         private readonly IMediator _mediator;
 
-        public EmployeeController(IEmployee empoyee, IMediator mediator) 
+        public EmployeeController(IMediator mediator) 
         {
-            this._employee = empoyee;
             this._mediator = mediator;
         }
 

@@ -1,5 +1,4 @@
-﻿using Application.Contracts;
-using Application.DTOs;
+﻿using Application.DTOs;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -32,7 +31,7 @@ namespace Application.Services
             var data = await _httpClient.DeleteAsync($"api/employee/{id}");
             var response = await data.Content.ReadFromJsonAsync<ServiceResponse>();
             return response;
-        }
+        } 
 
         public async Task<List<Employee>> GetAsync() =>
             await _httpClient.GetFromJsonAsync<List<Employee>>("api/employee");

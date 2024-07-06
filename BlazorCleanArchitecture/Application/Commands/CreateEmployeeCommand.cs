@@ -1,5 +1,4 @@
-﻿using Application.Contracts;
-using Application.DTOs;
+﻿using Application.DTOs;
 using Domain.Entities;
 using MediatR;
 using System;
