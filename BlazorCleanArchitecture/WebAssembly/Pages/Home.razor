@@ -66,14 +66,13 @@
 </div>
 
 @code{
-    // Toast POPUP ---------------------
-    void ShowSuccessToastPopup() => toastService.ShowSuccess("User has been added!");
-    void ShowFailToastPopup() => toastService.ShowError("Error on adding user!");
-    void ShowInfoToastPopup() => toastService.ShowInfo("User Deleted!");
-
     Employee employee = new();
+    List<Employee> Employees = new();
+    protected override async Task OnInitializedAsync() => await GetData();
+    private async Task GetData() => Employees = await emp.GetAsync();
 
 
+    // Button Save ------------------------------------------
     async Task Save()
     {
         var response = new ServiceResponse(false, null!);
@@ -84,24 +83,23 @@
 
         if (!response.Flag)
         {
-            ShowFailToastPopup();
+            toastService.ShowError("Error on adding user!");
             return;
         }
-        ShowSuccessToastPopup();
+        toastService.ShowSuccess("User has been added!");
 
         await GetData();
     }
 
-    List<Employee> Employees = new();
-    protected override async Task OnInitializedAsync() => await GetData();
-    private async Task GetData() => Employees = await emp.GetAsync();
 
-
-    // Events -------------------------------------------------------------
+    // Table employee buttons ------------------------------------------
     void EditClicked(Employee incomEmp) => employee = incomEmp;
     async void DeleteClicked(int id)
     {
         var (flag, massage) = await emp.DeleteAsync(id);
+
+        toastService.ShowInfo("User has been deleted!");
         await GetData();
+        StateHasChanged();
     }
 }
