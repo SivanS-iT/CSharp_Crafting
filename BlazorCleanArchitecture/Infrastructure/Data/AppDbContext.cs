@@ -15,5 +15,7 @@ namespace Infrastructure.Data
         }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Role> Roles{ get; set; }
+
     }
 }
