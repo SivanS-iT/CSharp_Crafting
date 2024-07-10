@@ -1,10 +1,8 @@
-using Application.Queries.EmployeeQuery;
-using Application.Services;
 using Blazored.Toast;
-using Infrastructure.Handlers.EmployeeHandler;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using WebAssembly;
+using WebAssembly.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

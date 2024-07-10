@@ -1,15 +1,7 @@
-﻿using Application.DTOs;
-using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Http.Json;
+using WebAssembly.Data;
 
-namespace Application.Services
+namespace WebAssembly.Services
 {
     public class EmployeeService : IEmployeeService
     {

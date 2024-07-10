@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.Features.Employee;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

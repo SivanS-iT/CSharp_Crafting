@@ -1,7 +1,6 @@
 ﻿using Application.Commands;
 using Application.Queries.EmployeeQuery;
-using Domain.Entities;
-using Infrastructure.Handlers.EmployeeHandler;
+using Domain.Features.Employee;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
