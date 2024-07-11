@@ -8,8 +8,5 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.EmployeeQuery
 {
-    public class GetEmployeeByIdQuery : IRequest<Employee>
-    {
-        public int Id { get; set; }
-    }
+    public record GetEmployeeByIdQuery(int Id) : IRequest<Employee>;
 }

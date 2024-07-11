@@ -11,7 +11,7 @@ namespace Application.Handlers.EmployeeHandler
 
         public async Task<ServiceResponse> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var serviceResponse = await _employeeRepository.UpdateEmployee(request.Employee, cancellationToken);
+            var serviceResponse = await _employeeRepository.UpdateEmployee(request.employee, cancellationToken);
             return serviceResponse;
         }
     }

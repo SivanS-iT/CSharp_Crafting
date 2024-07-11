@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id) => Ok( await _mediator.Send(new GetEmployeeByIdQuery { Id = id }));
+        public async Task<IActionResult> GetById(int id) => Ok( await _mediator.Send(new GetEmployeeByIdQuery(id)));
 
         /// <summary>
         /// Add employee
@@ -42,7 +42,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] Employee employeeDto)
         {
-            var result = await _mediator.Send(new CreateEmployeeCommand { Employee = employeeDto });
+            var result = await _mediator.Send(new CreateEmployeeCommand (employeeDto));
            return Ok(result);
         }
 
@@ -54,7 +54,7 @@ namespace WebAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] Employee employeeDto)
         {
-            var result = await _mediator.Send(new UpdateEmployeeCommand { Employee = employeeDto });
+            var result = await _mediator.Send(new UpdateEmployeeCommand (employeeDto));
             return Ok(result);
         }
 
@@ -66,7 +66,7 @@ namespace WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _mediator.Send(new DeleteEmployeeByIdCommand { Id = id });
+            var result = await _mediator.Send(new DeleteEmployeeByIdCommand (id));
             return Ok(result);
         }
     }

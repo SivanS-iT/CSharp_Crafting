@@ -3,8 +3,5 @@ using MediatR;
 
 namespace Application.Commands
 {
-    public class DeleteEmployeeByIdCommand : IRequest<ServiceResponse>
-    {
-        public int Id { get; set; }
-    }
+    public record DeleteEmployeeByIdCommand(int Id) : IRequest<ServiceResponse>;
 }

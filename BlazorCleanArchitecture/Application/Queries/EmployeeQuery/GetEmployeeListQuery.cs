@@ -8,7 +8,5 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.EmployeeQuery
 {
-    public class GetEmployeeListQuery : IRequest<List<Employee>>
-    {
-    }
+    public record GetEmployeeListQuery : IRequest<List<Employee>>;
 }
