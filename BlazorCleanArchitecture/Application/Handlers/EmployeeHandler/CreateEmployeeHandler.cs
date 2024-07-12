@@ -18,7 +18,7 @@ namespace Application.Handlers.EmployeeHandler
                 return new ServiceResponse(false, "User already exists");
             }
 
-            var employee = _employeeRepository.CreateEmployee(request.Employee, cancellationToken);
+            await _employeeRepository.CreateEmployee(request.Employee, cancellationToken);
             return new ServiceResponse(true, "User added");
         }
     }
