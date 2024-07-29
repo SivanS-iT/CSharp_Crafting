@@ -1,5 +1,6 @@
 ﻿using Application.Commands;
 using Application.Handlers.EmployeeHandler;
+using Application.Queries.EmployeeQuery;
 using Domain.Features.Employee;
 using FluentAssertions;
 using NSubstitute;
@@ -9,6 +10,15 @@ namespace Application.UnitTests.Employees.Commands
     public class CreateEmployeeCommandHandlerTests
     {
         private readonly IEmployeeRepository _employeeRpositoryMock;
+        private readonly CreateEmployeeHandler _createEmployeeHandler;
+        private readonly CreateEmployeeCommand _createEmployeeCommand;
+
+        public CreateEmployeeCommandHandlerTests()
+        {
+            _employeeRpositoryMock = Substitute.For<IEmployeeRepository>();
+            _createEmployeeHandler = new CreateEmployeeHandler(_employeeRpositoryMock);
+            _createEmployeeCommand = new CreateEmployeeCommand(employeeTest);
+        }
 
 
         private static readonly Employee employeeTest = new()
@@ -17,12 +27,9 @@ namespace Application.UnitTests.Employees.Commands
             Address = "Testing address",
             Name = "Ivan",
         };
-
-        public CreateEmployeeCommandHandlerTests()
-        {
-            _employeeRpositoryMock = Substitute.For<IEmployeeRepository>();
-        }
         private static readonly Employee? employeeAsNull = null;
+        private static readonly string employeeExistsMessage = "User already exists";
+        private static readonly string employeeAdded = "User added";
 
 
 
@@ -33,17 +40,14 @@ namespace Application.UnitTests.Employees.Commands
         public async void Handle_Should_ReturnFailureResult_WhenCreateEmployeeNameExists()
         {
             // Arrange
-            var handler = new CreateEmployeeHandler(_employeeRpositoryMock);
             _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeTest);
-            const string EmployeeExistsMessage = "User already exists";
-            CreateEmployeeCommand createEmployeeCommand = new CreateEmployeeCommand(employeeTest);
 
             // Act
-            var result = await handler.Handle(createEmployeeCommand, default);
+            var result = await _createEmployeeHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
             result.Flag.Should().BeFalse();
-            result.Message.Should().BeEquivalentTo(EmployeeExistsMessage);
+            result.Message.Should().BeEquivalentTo(employeeExistsMessage);
         }
 
 
@@ -54,36 +58,29 @@ namespace Application.UnitTests.Employees.Commands
         public async void Handle_Should_ReturnTrueResult_WhenCreateEmployeeNameDoesNotExist()
         {
             // Arrange
-            const string EmployeeAdded = "User added";
-            CreateEmployeeCommand createEmployeeCommands = new CreateEmployeeCommand(employeeTest);
-
-            var handler = new CreateEmployeeHandler(_employeeRpositoryMock);
             _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeAsNull);
             
             // Act
-            var result = await handler.Handle(createEmployeeCommands, default);
+            var result = await _createEmployeeHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
             result.Flag.Should().BeTrue();
-            result.Message.Should().BeEquivalentTo(EmployeeAdded);
+            result.Message.Should().BeEquivalentTo(employeeAdded);
         }
 
 
 
         /// <summary>
-        /// Test if CheckExists and CreateEmployee are executed properly
+        /// Employee should not be created
         /// </summary>
         [Fact]
         public async void Handle_Should_NotCreateEmployee_WhenEmployeeExists()
         {
             // Arrange
-            CreateEmployeeCommand createEmployeeCommands = new CreateEmployeeCommand(employeeTest);
-
-            var handler = new CreateEmployeeHandler(_employeeRpositoryMock);
             _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeTest);
 
             // Act
-            await handler.Handle(createEmployeeCommands, default);
+            await _createEmployeeHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
             await _employeeRpositoryMock.Received(0).CreateEmployee(Arg.Is<Employee>(e => e == employeeTest), default);
@@ -92,23 +89,19 @@ namespace Application.UnitTests.Employees.Commands
 
 
         /// <summary>
-        /// Test if CheckExists and CreateEmployee are executed properly
+        /// Employee should be created
         /// </summary>
         [Fact]
         public async void Handle_Should_CreateEmployee_WhenEmployeeDoesNotExist()
         {
             // Arrange
-            CreateEmployeeCommand createEmployeeCommands = new CreateEmployeeCommand(employeeTest);
-
-            var handler = new CreateEmployeeHandler(_employeeRpositoryMock);
             _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeAsNull);
 
             // Act
-            await handler.Handle(createEmployeeCommands, default);
+            await _createEmployeeHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
             await _employeeRpositoryMock.Received(1).CreateEmployee(Arg.Is<Employee>(e => e == employeeTest), default);
-
         }
 
     }
