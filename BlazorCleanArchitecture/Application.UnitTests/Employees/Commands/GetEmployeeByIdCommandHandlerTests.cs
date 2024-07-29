@@ -41,7 +41,7 @@ namespace Application.UnitTests.Employees.Commands
         /// Returns List of employee
         /// </summary>
         [Fact]
-        public async void Handle_Should_ReturnEmployeeList()
+        public async void Handle_Should_ReturnEmployee()
         {
             // Arrange
             _employeeRpositoryMock.GetEmployeeById(empId, default).Returns(employeeTest);
