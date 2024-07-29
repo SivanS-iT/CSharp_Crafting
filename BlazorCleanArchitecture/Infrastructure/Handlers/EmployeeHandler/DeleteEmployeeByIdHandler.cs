@@ -1,4 +1,5 @@
-﻿using Application.Commands;
+﻿
+using Application.Commands;
 using Application.DTOs;
 using Azure.Core;
 using Infrastructure.Data;
@@ -27,7 +28,6 @@ namespace Infrastructure.Handlers.EmployeeHandler
             {
                 return new ServiceResponse(false, "User not found");
             }
-
             _appDbContext.Employees.Remove(employee);
             await _appDbContext.SaveChangesAsync(cancellationToken);
             return new ServiceResponse(true, "User deleted");
