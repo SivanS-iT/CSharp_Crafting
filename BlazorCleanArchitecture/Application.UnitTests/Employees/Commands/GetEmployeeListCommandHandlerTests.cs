@@ -16,7 +16,7 @@ namespace Application.UnitTests.Employees.Commands
     {
         private readonly IEmployeeRepository _employeeRpositoryMock;
         private readonly GetEmployeeListHandler _getEmployeeListHandler;
-        private readonly GetEmployeeListQuery _createEmployeeCommand;
+        private readonly GetEmployeeListQuery _getEmployeeCommand;
 
 
         private static readonly List<Employee> employeeTestList =
@@ -30,7 +30,7 @@ namespace Application.UnitTests.Employees.Commands
         {
             _employeeRpositoryMock = Substitute.For<IEmployeeRepository>();
             _getEmployeeListHandler = new GetEmployeeListHandler(_employeeRpositoryMock);
-            _createEmployeeCommand = new GetEmployeeListQuery();
+            _getEmployeeCommand = new GetEmployeeListQuery();
         }
         private static readonly Employee? employeeAsNull = null;
 
@@ -46,7 +46,7 @@ namespace Application.UnitTests.Employees.Commands
             _employeeRpositoryMock.GetEmployees(default).Returns(employeeTestList);
 
             // Act
-            var result = await _getEmployeeListHandler.Handle(_createEmployeeCommand, default);
+            var result = await _getEmployeeListHandler.Handle(_getEmployeeCommand, default);
 
             // Assert
             result.As<List<Employee>>();
@@ -61,7 +61,7 @@ namespace Application.UnitTests.Employees.Commands
         public async void Handle_Should_CallRepository()
         {
             // Act
-            await _getEmployeeListHandler.Handle(_createEmployeeCommand, default);
+            await _getEmployeeListHandler.Handle(_getEmployeeCommand, default);
 
             // Assert
             await _employeeRpositoryMock.Received(1).GetEmployees(default);
