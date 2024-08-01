@@ -1,18 +1,24 @@
 version: '3.4'
 
 services:
-  webapi:
-    image: ${DOCKER_REGISTRY-}webapi
-    build:
-      context: .
-      dockerfile: WebAPI/Dockerfile
-  db:
-    container_name: Db
-    image: mcr.microsoft.com/mssql/server:2022-latest
+  cleanproject-db:
+    image: postgres:16.2
+    container_name: CleanProject.Db
     volumes:
-        - ./.containers/db:/var/lib/mssql/data
+      - ./.containers/cleanproject-db:/var/lib/postgresql/data
     ports:
-        - "1433:1433"
+      - "5432:5432"
     environment:
-        ACCEPT_EULA: "Y"
-        SA_PASSWORD: "IvanSivans123"
+      - POSTGRES_DB=cleanproject
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  cleanproject-pgadmin:
+    image: dpage/pgadmin4
+    container_name: CleanProject.PgAdmin
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: cleanproject@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: cleanproject 
+    volumes:
+      - ./.containers/cleanproject-pgadmin:/var/lib/pgadmin/data
