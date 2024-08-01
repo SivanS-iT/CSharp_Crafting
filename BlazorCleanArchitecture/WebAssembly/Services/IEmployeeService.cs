@@ -1,12 +1,7 @@
-﻿using Application.DTOs;
-using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using WebAssembly.Data;
 
-namespace Application.Services
+namespace WebAssembly.Services
 {
     public interface IEmployeeService
     {

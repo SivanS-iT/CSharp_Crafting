@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.Features.Employee;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,5 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.EmployeeQuery
 {
-    public class GetEmployeeListQuery : IRequest<List<Employee>>
-    {
-    }
+    public record GetEmployeeListQuery : IRequest<List<Employee>>;
 }

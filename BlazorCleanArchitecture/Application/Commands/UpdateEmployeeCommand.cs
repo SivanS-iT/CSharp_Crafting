@@ -1,16 +1,8 @@
-﻿using Application.DTOs;
-using Domain.Entities;
+﻿using Domain.DTOs;
+using Domain.Features.Employee;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Commands
 {
-    public class UpdateEmployeeCommand : IRequest<ServiceResponse>
-    {
-        public Employee? Employee { get; set; }
-    }
+    public record UpdateEmployeeCommand(Employee employee) : IRequest<ServiceResponse>;
 }
