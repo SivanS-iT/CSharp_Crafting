@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 using Application.Handlers.EmployeeHandler;
 using Domain.Features.Employee;
->>>>>>> app-xunit-tests
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -20,14 +17,12 @@ internal class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-<<<<<<< HEAD
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddDbContext<AppDbContext>(options =>
                     options.UseNpgsql(connectionString));
 
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetEmployeeListHandler).Assembly));
         builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
->>>>>>> app-xunit-tests
 
         var app = builder.Build();
 
