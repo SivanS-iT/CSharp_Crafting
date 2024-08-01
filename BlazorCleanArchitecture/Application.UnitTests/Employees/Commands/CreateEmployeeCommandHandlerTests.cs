@@ -17,10 +17,14 @@ namespace Application.UnitTests.Employees.Commands
         {
             _employeeRpositoryMock = Substitute.For<IEmployeeRepository>();
             _createEmployeeHandler = new CreateEmployeeHandler(_employeeRpositoryMock);
-            _createEmployeeCommand = new CreateEmployeeCommand(employeeTest);
+            _createEmployeeCommand = new CreateEmployeeCommand(employeeTestRequest);
         }
 
-
+        private static readonly CreateEmployeeRequest employeeTestRequest = new()
+        {
+            Address = "Testing address",
+            Name = "Ivan",
+        };
         private static readonly Employee employeeTest = new()
         {
             Id = 1,
@@ -83,8 +87,7 @@ namespace Application.UnitTests.Employees.Commands
             await _createEmployeeHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
-            await _employeeRpositoryMock.Received(0).CreateEmployee(Arg.Is<Employee>(e => e == employeeTest), default);
-
+            await _employeeRpositoryMock.Received(0).CreateEmployee(Arg.Is<CreateEmployeeRequest>(e => e == employeeTestRequest), default);
         }
 
 
@@ -101,7 +104,7 @@ namespace Application.UnitTests.Employees.Commands
             await _createEmployeeHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
-            await _employeeRpositoryMock.Received(1).CreateEmployee(Arg.Is<Employee>(e => e == employeeTest), default);
+            await _employeeRpositoryMock.Received(1).CreateEmployee(Arg.Is<CreateEmployeeRequest>(e => e == employeeTestRequest), default);
         }
 
     }

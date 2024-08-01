@@ -33,8 +33,13 @@ namespace Infrastructure.Repositories
             return await _appDbContext.Employees.FindAsync(employeeId, cancellationToken);
         }
 
-        public async Task<Employee> CreateEmployee(Employee employee, CancellationToken cancellationToken)
+        public async Task<Employee> CreateEmployee(CreateEmployeeRequest createEmployeeRequest, CancellationToken cancellationToken)
         {
+            var employee = new Employee
+            {
+                Name = createEmployeeRequest.Name,
+                Address = createEmployeeRequest.Address
+            };
             await _appDbContext.Employees.AddAsync(employee);
             await _appDbContext.SaveChangesAsync(cancellationToken);
             return employee;

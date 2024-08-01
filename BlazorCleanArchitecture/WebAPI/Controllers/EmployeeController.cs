@@ -40,9 +40,9 @@ namespace WebAPI.Controllers
         /// <param name="employeeDto"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] Employee employeeDto)
+        public async Task<IActionResult> Add([FromBody] CreateEmployeeRequest employeeDto)
         {
-            var result = await _mediator.Send(new CreateEmployeeCommand (employeeDto));
+           var result = await _mediator.Send(new CreateEmployeeCommand (employeeDto));
            return Ok(result);
         }
 

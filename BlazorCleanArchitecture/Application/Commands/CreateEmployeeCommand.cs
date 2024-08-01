@@ -4,5 +4,5 @@ using MediatR;
 
 namespace Application.Commands
 {
-    public record CreateEmployeeCommand(Employee Employee) : IRequest<ServiceResponse>;
+    public record CreateEmployeeCommand(CreateEmployeeRequest Employee) : IRequest<ServiceResponse>;
 }

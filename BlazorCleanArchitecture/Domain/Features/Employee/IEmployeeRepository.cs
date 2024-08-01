@@ -10,7 +10,7 @@ namespace Domain.Features.Employee
 
         public Task<Employee?> GetEmployeeById(int employeeId, CancellationToken cancellationToken);
         public Task<List<Employee>> GetEmployees(CancellationToken cancellationToken);
-        public Task<Employee> CreateEmployee(Employee employee, CancellationToken cancellationToken);
+        public Task<Employee> CreateEmployee(CreateEmployeeRequest employee, CancellationToken cancellationToken);
         public Task<ServiceResponse> UpdateEmployee(Employee employee, CancellationToken cancellationToken);
         public Task<ServiceResponse> DeleteEmployee(Employee employee, CancellationToken cancellationToken);
 
