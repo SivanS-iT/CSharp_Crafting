@@ -16,7 +16,7 @@ namespace Application.Handlers.EmployeeHandler
         public async Task<ServiceResponse> Handle(DeleteEmployeeByIdCommand request, CancellationToken cancellationToken)
         {
             var check = _employeeRepository.CheckExistsById(request.Id, cancellationToken);
-            if (check == null)
+            if (check.Result == null)
             {
                 return new ServiceResponse(false, "User not found");
             }
