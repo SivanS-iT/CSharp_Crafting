@@ -1,5 +1,4 @@
-﻿using Application.Commands;
-using Application.Commands.EmployeeCommands;
+﻿using Application.Commands.EmployeeCommands;
 using Application.Queries.EmployeeQuery;
 using Domain.Features.Employee;
 using MediatR;

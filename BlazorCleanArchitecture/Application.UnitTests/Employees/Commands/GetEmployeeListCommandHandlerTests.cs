@@ -1,14 +1,8 @@
-﻿using Application.Commands;
-using Application.Handlers.EmployeeHandler;
+﻿using Application.Handlers.EmployeeHandler;
 using Application.Queries.EmployeeQuery;
 using Domain.Features.Employee;
 using FluentAssertions;
 using NSubstitute;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.UnitTests.Employees.Commands
 {

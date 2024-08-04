@@ -1,5 +1,4 @@
-﻿using Application.Commands;
-using Application.Commands.EmployeeCommands;
+﻿using Application.Commands.EmployeeCommands;
 using Application.Handlers.EmployeeHandler;
 using Domain.Features.Employee;
 using FluentAssertions;
