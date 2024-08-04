@@ -1,10 +1,15 @@
 ﻿using Application.Commands;
+using Application.Commands.EmployeeCommands;
 using Domain.DTOs;
 using Domain.Features.Employee;
 using MediatR;
 
 namespace Application.Handlers.EmployeeHandler
 {
+    /// <summary>
+    /// Handler for creating employee.
+    /// </summary>
+    /// <param name="employeeRepository"></param>
     public class CreateEmployeeHandler(IEmployeeRepository employeeRepository) : IRequestHandler<CreateEmployeeCommand, ServiceResponse>
     {
         

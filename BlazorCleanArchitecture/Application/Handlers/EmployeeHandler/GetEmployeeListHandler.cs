@@ -4,6 +4,10 @@ using MediatR;
 
 namespace Application.Handlers.EmployeeHandler
 {
+    /// <summary>
+    /// Handler for getting employees.
+    /// </summary>
+    /// <param name="employeeRepository"></param>
     public class GetEmployeeListHandler(IEmployeeRepository  employeeRepository) : IRequestHandler<GetEmployeeListQuery, List<Employee>>
     {
         private readonly IEmployeeRepository _employeeRepository = employeeRepository;
