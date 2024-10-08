@@ -6,14 +6,13 @@ namespace Application.IntegrationTests;
 
 public abstract class BaseIntegrationTest : IClassFixture<IntegrationTestWebAppFactory>
 {
-    private readonly IServiceScope _scope;
     protected readonly ISender Sender;
-    protected readonly AppDbContext dbContext;
+    protected readonly AppDbContext DbContext;
 
     protected BaseIntegrationTest(IntegrationTestWebAppFactory factory)
     {
-        _scope = factory.Services.CreateScope();
-        Sender = _scope.ServiceProvider.GetRequiredService<ISender>();
-        dbContext = _scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    } 
+        var scope = factory.Services.CreateScope();
+        Sender = scope.ServiceProvider.GetRequiredService<ISender>();
+        DbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    }
 }

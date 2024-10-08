@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Testcontainers.PostgreSql;
+using WebAPI;
 
 namespace Application.IntegrationTests;
 
@@ -16,36 +17,22 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
         .WithDatabase("cleanproject")
         .WithUsername("postgres")
         .WithPassword("postgres")
-        .Build(); 
-    
-    
-    protected override void ConfigureWebHost (IWebHostBuilder builder)
+        .Build();
+
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.ConfigureTestServices (services =>
+        builder.ConfigureTestServices(services =>
         {
-            //services.RemoveAll(typeof(DbContextOptions<AppDbContext>));
-            
-            var descriptor = services
-                .SingleOrDefault(s => s.ServiceType == typeof(DbContextOptions<AppDbContext>));
-            
-            if (descriptor is not null)
-            {
-                services.Remove(descriptor);
-            }
-            
+            services.RemoveAll(typeof(DbContextOptions<AppDbContext>));
             services.AddDbContext<AppDbContext>(options =>
-            {
-                options.UseNpgsql(_dbContainer.GetConnectionString())
-                .UseSnakeCaseNamingConvention(); 
-            });
+                options.UseNpgsql(_dbContainer.GetConnectionString()));
         });
     }
 
-    
     // interfaces
     public Task InitializeAsync()
     {
-        return _dbContainer.StartAsync(); 
+        return _dbContainer.StartAsync();
     }
 
     public new Task DisposeAsync()

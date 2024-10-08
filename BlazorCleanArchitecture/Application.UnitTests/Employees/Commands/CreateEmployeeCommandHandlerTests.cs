@@ -9,13 +9,13 @@ namespace Application.UnitTests.Employees.Commands
     public class CreateEmployeeCommandHandlerTests
     {
         private readonly IEmployeeRepository _employeeRpositoryMock;
-        private readonly CreateEmployeeHandler _createEmployeeHandler;
+        private readonly CreateEmployeeCommandHandler _createEmployeeCommandHandler;
         private readonly CreateEmployeeCommand _createEmployeeCommand;
 
         public CreateEmployeeCommandHandlerTests()
         {
             _employeeRpositoryMock = Substitute.For<IEmployeeRepository>();
-            _createEmployeeHandler = new CreateEmployeeHandler(_employeeRpositoryMock);
+            _createEmployeeCommandHandler = new CreateEmployeeCommandHandler(_employeeRpositoryMock);
             _createEmployeeCommand = new CreateEmployeeCommand(employeeTestRequest);
         }
 
@@ -46,7 +46,7 @@ namespace Application.UnitTests.Employees.Commands
             _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeTest);
 
             // Act
-            var result = await _createEmployeeHandler.Handle(_createEmployeeCommand, default);
+            var result = await _createEmployeeCommandHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
             result.Flag.Should().BeFalse();
@@ -64,7 +64,7 @@ namespace Application.UnitTests.Employees.Commands
             _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeAsNull);
             
             // Act
-            var result = await _createEmployeeHandler.Handle(_createEmployeeCommand, default);
+            var result = await _createEmployeeCommandHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
             result.Flag.Should().BeTrue();
@@ -83,7 +83,7 @@ namespace Application.UnitTests.Employees.Commands
             _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeTest);
 
             // Act
-            await _createEmployeeHandler.Handle(_createEmployeeCommand, default);
+            await _createEmployeeCommandHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
             await _employeeRpositoryMock.Received(0).CreateEmployee(Arg.Is<CreateEmployeeRequest>(e => e == employeeTestRequest), default);
@@ -100,7 +100,7 @@ namespace Application.UnitTests.Employees.Commands
             _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeAsNull);
 
             // Act
-            await _createEmployeeHandler.Handle(_createEmployeeCommand, default);
+            await _createEmployeeCommandHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
             await _employeeRpositoryMock.Received(1).CreateEmployee(Arg.Is<CreateEmployeeRequest>(e => e == employeeTestRequest), default);

@@ -1,6 +1,7 @@
 using Application.Commands.EmployeeCommands;
 using Domain.DTOs;
 using Domain.Features.Employee;
+using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
 namespace Application.IntegrationTests;
@@ -8,14 +9,13 @@ namespace Application.IntegrationTests;
 public class EmployeeTest : BaseIntegrationTest
 {
     private readonly CreateEmployeeCommand _createEmployeeCommand;
-    
+
     private static readonly CreateEmployeeRequest employeeTestRequest = new()
     {
         Address = "Testing",
         Name = "sdfsdf",
     };
 
-    
     /// <summary>
     /// Constructor
     /// </summary>
@@ -25,27 +25,26 @@ public class EmployeeTest : BaseIntegrationTest
         _createEmployeeCommand = new CreateEmployeeCommand(employeeTestRequest);
     }
 
-
-
     [Fact]
     public async Task Create_ShouldTrowPosgressException_WhenEmpTestRequestIsInvalid()
     {
         // Arrange
         var command = new CreateEmployeeCommand(employeeTestRequest);
-        
+
         // Ack
         Task Action() => Sender.Send(_createEmployeeCommand);
 
         // Assert
         await Assert.ThrowsAsync<PostgresException>(Action);
     }
-    
+
     [Fact]
     public async Task Create_ShouldAddEmployee_WhenCommandIsValid()
     {
         // Arrange
+        var neke = await DbContext.Employees.AsQueryable().ToListAsync();
         var command = new CreateEmployeeCommand(employeeTestRequest);
-        
+
         // Ack
         var response = await Sender.Send(_createEmployeeCommand);
 
