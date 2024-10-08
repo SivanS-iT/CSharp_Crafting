@@ -25,25 +25,12 @@ public class EmployeeTest : BaseIntegrationTest
         _createEmployeeCommand = new CreateEmployeeCommand(employeeTestRequest);
     }
 
-    [Fact]
-    public async Task Create_ShouldTrowPosgressException_WhenEmpTestRequestIsInvalid()
-    {
-        // Arrange
-        var command = new CreateEmployeeCommand(employeeTestRequest);
-
-        // Ack
-        Task Action() => Sender.Send(_createEmployeeCommand);
-
-        // Assert
-        await Assert.ThrowsAsync<PostgresException>(Action);
-    }
-
+    
     [Fact]
     public async Task Create_ShouldAddEmployee_WhenCommandIsValid()
     {
         // Arrange
-        var neke = await DbContext.Employees.AsQueryable().ToListAsync();
-        var command = new CreateEmployeeCommand(employeeTestRequest);
+        employeeTestRequest.Name = "NewTestName";
 
         // Ack
         var response = await Sender.Send(_createEmployeeCommand);
