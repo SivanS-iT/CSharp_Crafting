@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Testcontainers.PostgreSql;
 
 namespace Application.IntegrationTests;
@@ -12,7 +13,7 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
 {
     private readonly PostgreSqlContainer _dbContainer = new PostgreSqlBuilder()
         .WithImage("postgres:16.2")
-        .WithDatabase("CleanProject.Db")
+        .WithDatabase("cleanproject")
         .WithUsername("postgres")
         .WithPassword("postgres")
         .Build(); 
@@ -22,6 +23,8 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
     {
         builder.ConfigureTestServices (services =>
         {
+            //services.RemoveAll(typeof(DbContextOptions<AppDbContext>));
+            
             var descriptor = services
                 .SingleOrDefault(s => s.ServiceType == typeof(DbContextOptions<AppDbContext>));
             
@@ -32,8 +35,8 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
             
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseNpgsql(_dbContainer.GetConnectionString());
-                //.UseSnakeCaseNamingConvention(); 
+                options.UseNpgsql(_dbContainer.GetConnectionString())
+                .UseSnakeCaseNamingConvention(); 
             });
         });
     }
