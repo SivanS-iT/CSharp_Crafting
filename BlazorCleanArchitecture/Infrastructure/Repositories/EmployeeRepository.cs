@@ -1,11 +1,12 @@
 ﻿using Domain.DTOs;
 using Domain.Features.Employee;
 using Infrastructure.Data;
+using Infrastructure.Repositories.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class EmployeeRepository(AppDbContext appDbContext) : IEmployeeRepository
+    public class EmployeeRepository(AppDbContext appDbContext) : GenericRepository<Employee>(appDbContext),  IEmployeeRepository
     {
         public async Task<Employee?> CheckExists(string name, CancellationToken cancellationToken)
         {
@@ -19,6 +20,8 @@ namespace Infrastructure.Repositories
                 cancellationToken: cancellationToken);
         }
 
+
+        
         public async Task<List<Employee>> GetEmployees(CancellationToken cancellationToken)
         {
             return await appDbContext.Employees.ToListAsync(cancellationToken: cancellationToken);
@@ -30,18 +33,18 @@ namespace Infrastructure.Repositories
                 cancellationToken: cancellationToken);
         }
 
-        public async Task<Employee> CreateEmployee(CreateEmployeeRequest createEmployeeRequest,
-            CancellationToken cancellationToken)
-        {
-            var employee = new Employee
-            {
-                Name = createEmployeeRequest.Name,
-                Address = createEmployeeRequest.Address
-            };
-            await appDbContext.Employees.AddAsync(employee, cancellationToken);
-            await appDbContext.SaveChangesAsync(cancellationToken);
-            return employee;
-        }
+        //public async Task<Employee> CreateEmployee(CreateEmployeeRequest createEmployeeRequest,
+        //    CancellationToken cancellationToken)
+        //{
+        //    var employee = new Employee
+        //    {
+        //        Name = createEmployeeRequest.Name,
+        //        Address = createEmployeeRequest.Address
+        //    };
+        //    await appDbContext.Employees.AddAsync(employee, cancellationToken);
+        //    await appDbContext.SaveChangesAsync(cancellationToken);
+        //    return employee;
+        //}
 
         public async Task<ServiceResponse> UpdateEmployee(Employee employee, CancellationToken cancellationToken)
         {
