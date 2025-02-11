@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.Abstractions;
 
 namespace Domain.Features.Employee
 {
-    public class Employee
+    public class Employee : Entity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string? Address { get; set; }
     }
