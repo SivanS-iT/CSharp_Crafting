@@ -1,6 +1,4 @@
-﻿using Domain.Abstractions;
-using Domain.DTOs;
-using Domain.Features.Employee;
+﻿using Domain.Features.Employee;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,7 +29,7 @@ namespace Infrastructure.Repositories
                 cancellationToken: cancellationToken);
         }
 
-        public async Task<Employee> CreateEmployee(CreateEmployeeRequest createEmployeeRequest,
+        public void CreateEmployee(CreateEmployeeRequest createEmployeeRequest,
             CancellationToken cancellationToken)
         {
             var employee = new Employee
@@ -39,20 +37,17 @@ namespace Infrastructure.Repositories
                 Name = createEmployeeRequest.Name,
                 Address = createEmployeeRequest.Address
             };
-            await appDbContext.Employees.AddAsync(employee, cancellationToken);
-            return employee;
+            appDbContext.Employees.AddAsync(employee, cancellationToken);
         }
 
-        public async Task<ServiceResponse> UpdateEmployee(Employee employee, CancellationToken cancellationToken)
-        {
+        public void UpdateEmployee(Employee employee, CancellationToken cancellationToken)
+        { 
             appDbContext.Update(employee);
-            return new ServiceResponse(true, "User updated");
         }
 
-        public async Task<ServiceResponse> DeleteEmployee(Employee employee, CancellationToken cancellationToken)
-        {
+        public async void DeleteEmployee(Employee employee, CancellationToken cancellationToken)
+        { 
             appDbContext.Employees.Remove(employee);
-            return new ServiceResponse(true, "User deleted");
         }
     }
 }

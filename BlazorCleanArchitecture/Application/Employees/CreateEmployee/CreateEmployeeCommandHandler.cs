@@ -20,7 +20,7 @@ namespace Application.Employees.CreateEmployee
                 return  Result.Failure(EmployeeErrors.Exists(employee.Name));
             }
 
-            await employeeRepository.CreateEmployee(request.Employee, cancellationToken);
+            employeeRepository.CreateEmployee(request.Employee, cancellationToken);
 
             await unitOfWork.SaveChangesAsync(cancellationToken);
             
