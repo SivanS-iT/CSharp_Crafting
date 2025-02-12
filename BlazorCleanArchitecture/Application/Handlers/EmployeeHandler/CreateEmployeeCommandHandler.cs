@@ -1,4 +1,6 @@
-﻿using Application.Commands.EmployeeCommands;
+﻿using Application.Abstractions.Data;
+using Application.Abstractions.Messaging;
+using Application.Commands.EmployeeCommands;
 using Domain.Abstractions;
 using Domain.DTOs;
 using Domain.Features.Employee;
@@ -10,8 +12,8 @@ namespace Application.Handlers.EmployeeHandler
     /// Handler for creating employee.
     /// </summary>
     /// <param name="employeeRepository"></param>
-    public class CreateEmployeeCommandHandler(IEmployeeRepository employeeRepository)
-        : IRequestHandler<CreateEmployeeCommand, Result>
+    public class CreateEmployeeCommandHandler(IEmployeeRepository employeeRepository, IUnitOfWork unitOfWork)
+        : ICommandHandler<CreateEmployeeCommand>
     {
         public async Task<Result> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
