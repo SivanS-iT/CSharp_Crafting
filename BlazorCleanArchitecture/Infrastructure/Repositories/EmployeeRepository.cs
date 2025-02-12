@@ -40,21 +40,18 @@ namespace Infrastructure.Repositories
                 Address = createEmployeeRequest.Address
             };
             await appDbContext.Employees.AddAsync(employee, cancellationToken);
-            await appDbContext.SaveChangesAsync(cancellationToken);
             return employee;
         }
 
         public async Task<ServiceResponse> UpdateEmployee(Employee employee, CancellationToken cancellationToken)
         {
             appDbContext.Update(employee);
-            await appDbContext.SaveChangesAsync(cancellationToken);
             return new ServiceResponse(true, "User updated");
         }
 
         public async Task<ServiceResponse> DeleteEmployee(Employee employee, CancellationToken cancellationToken)
         {
             appDbContext.Employees.Remove(employee);
-            await appDbContext.SaveChangesAsync(cancellationToken);
             return new ServiceResponse(true, "User deleted");
         }
     }

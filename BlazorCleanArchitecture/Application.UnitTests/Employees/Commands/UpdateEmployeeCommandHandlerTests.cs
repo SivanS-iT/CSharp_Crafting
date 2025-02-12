@@ -16,7 +16,7 @@ namespace Application.UnitTests.Employees.Commands
         public UpdateEmployeeCommandHandlerTests()
         {
             _employeeRpositoryMock = Substitute.For<IEmployeeRepository>();
-            _updateEmployeeHandler = new UpdateEmployeeHandler(_employeeRpositoryMock);
+            //_updateEmployeeHandler = new UpdateEmployeeHandler(_employeeRpositoryMock);
             _updateEmployeeCommand = new UpdateEmployeeCommand(employeeTest);
         }
 

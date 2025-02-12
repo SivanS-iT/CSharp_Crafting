@@ -24,6 +24,9 @@ namespace Application.Handlers.EmployeeHandler
             }
 
             await employeeRepository.CreateEmployee(request.Employee, cancellationToken);
+
+            await unitOfWork.SaveChangesAsync(cancellationToken);
+            
             return Result.Success();
         }
     }
