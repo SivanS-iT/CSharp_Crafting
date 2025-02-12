@@ -1,4 +1,5 @@
-﻿using Domain.DTOs;
+﻿using Domain.Abstractions;
+using Domain.DTOs;
 using Domain.Features.Employee;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
