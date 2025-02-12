@@ -18,7 +18,7 @@ public class DeleteEmployeeCommandHandlerTests
         public DeleteEmployeeCommandHandlerTests()
         {
             _employeeRepositoryMock = Substitute.For<IEmployeeRepository>();
-            _deleteEmployeeHandler = new DeleteEmployeeByIdHandler(_employeeRepositoryMock);
+            //_deleteEmployeeHandler = new DeleteEmployeeByIdHandler(_employeeRepositoryMock);
             _deleteEmployeeCommand = new DeleteEmployeeByIdCommand(employeeId);
             _serviceResponse = new ServiceResponse(flagTrue, messageDeleted);
         }

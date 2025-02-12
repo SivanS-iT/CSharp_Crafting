@@ -1,4 +1,5 @@
-﻿using Application.Commands.EmployeeCommands;
+﻿using Application.Abstractions.Data;
+using Application.Commands.EmployeeCommands;
 using Domain.DTOs;
 using Domain.Features.Employee;
 using MediatR;
@@ -9,7 +10,8 @@ namespace Application.Handlers.EmployeeHandler
     /// Handler for updating employee.
     /// </summary>
     /// <param name="employeeRepository"></param>
-    public class UpdateEmployeeHandler(IEmployeeRepository employeeRepository) : IRequestHandler<UpdateEmployeeCommand, ServiceResponse>
+    public class UpdateEmployeeHandler(IEmployeeRepository employeeRepository, IUnitOfWork unitOfWork)
+        : IRequestHandler<UpdateEmployeeCommand, ServiceResponse>
     {
         private readonly IEmployeeRepository _employeeRepository = employeeRepository;
 
@@ -22,7 +24,8 @@ namespace Application.Handlers.EmployeeHandler
             }
 
             var serviceResponse = await _employeeRepository.UpdateEmployee(request.employee, cancellationToken);
-            
+
+            await unitOfWork.SaveChangesAsync(cancellationToken);
             
             return serviceResponse;
         }

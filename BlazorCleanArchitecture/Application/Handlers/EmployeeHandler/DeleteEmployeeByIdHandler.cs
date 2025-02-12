@@ -1,4 +1,5 @@
-﻿using Application.Commands.EmployeeCommands;
+﻿using Application.Abstractions.Data;
+using Application.Commands.EmployeeCommands;
 using Domain.DTOs;
 using Domain.Features.Employee;
 using MediatR;
@@ -9,7 +10,8 @@ namespace Application.Handlers.EmployeeHandler
     /// Handler for deleting employee.
     /// </summary>
     /// <param name="employeeRepository"></param>
-    public class DeleteEmployeeByIdHandler(IEmployeeRepository employeeRepository) : IRequestHandler<DeleteEmployeeByIdCommand, ServiceResponse>
+    public class DeleteEmployeeByIdHandler(IEmployeeRepository employeeRepository, IUnitOfWork unitOfWork) 
+        : IRequestHandler<DeleteEmployeeByIdCommand, ServiceResponse>
     {
         private readonly IEmployeeRepository _employeeRepository = employeeRepository;
 
@@ -23,6 +25,8 @@ namespace Application.Handlers.EmployeeHandler
 
             var successfulResponse = await _employeeRepository.DeleteEmployee(check.Result, cancellationToken);
 
+            await unitOfWork.SaveChangesAsync(cancellationToken);
+            
             return successfulResponse;
         }
     }
