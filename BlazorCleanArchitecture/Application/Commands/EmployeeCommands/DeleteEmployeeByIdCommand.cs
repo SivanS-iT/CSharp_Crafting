@@ -1,5 +1,5 @@
-﻿using Domain.DTOs;
-using MediatR;
+﻿
+using Application.Abstractions.Messaging;
 
 namespace Application.Commands.EmployeeCommands
 {
@@ -7,5 +7,5 @@ namespace Application.Commands.EmployeeCommands
     /// Delete Employee Command
     /// </summary>
     /// <param name="Id"></param>
-    public record DeleteEmployeeByIdCommand(int Id) : IRequest<ServiceResponse>;
+    public record DeleteEmployeeByIdCommand(int Id) : ICommand;
 }

@@ -17,10 +17,10 @@ namespace Application.Handlers.EmployeeHandler
     {
         public async Task<Result> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var check = await employeeRepository.CheckExists(request.Employee.Name, cancellationToken);
-            if (check != null)
+            var employee = await employeeRepository.CheckExists(request.Employee.Name, cancellationToken);
+            if (employee != null)
             {
-                return  Result.Failure(EmployeeErrors.Exists(check.Name));
+                return  Result.Failure(EmployeeErrors.Exists(employee.Name));
             }
 
             await employeeRepository.CreateEmployee(request.Employee, cancellationToken);

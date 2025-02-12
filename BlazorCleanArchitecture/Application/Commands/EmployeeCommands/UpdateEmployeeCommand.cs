@@ -1,6 +1,5 @@
-﻿using Domain.DTOs;
+﻿using Application.Abstractions.Messaging;
 using Domain.Features.Employee;
-using MediatR;
 
 namespace Application.Commands.EmployeeCommands
 {
@@ -8,5 +7,5 @@ namespace Application.Commands.EmployeeCommands
     /// Update emplyee command
     /// </summary>
     /// <param name="employee"></param>
-    public record UpdateEmployeeCommand(Employee employee) : IRequest<ServiceResponse>;
+    public record UpdateEmployeeCommand(Employee employee) : ICommand;
 }
