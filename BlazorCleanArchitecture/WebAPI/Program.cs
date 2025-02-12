@@ -1,5 +1,5 @@
 using Application.Abstractions.Data;
-using Application.Handlers.EmployeeHandler;
+using Application.Employees.GetEmployees;
 using Domain.Features.Employee;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
