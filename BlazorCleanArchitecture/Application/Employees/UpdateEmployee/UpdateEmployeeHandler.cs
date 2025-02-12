@@ -22,7 +22,7 @@ namespace Application.Employees.UpdateEmployee
                 return  Result.Failure(EmployeeErrors.Exists(employee.Name));
             }
 
-            await _employeeRepository.UpdateEmployee(request.employee, cancellationToken);
+            _employeeRepository.UpdateEmployee(request.employee, cancellationToken);
 
             await unitOfWork.SaveChangesAsync(cancellationToken);
             
