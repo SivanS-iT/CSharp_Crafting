@@ -1,4 +1,5 @@
-﻿using Domain.DTOs;
+﻿using Domain.Abstractions;
+using Domain.DTOs;
 
 namespace Domain.Features.Employee
 {
