@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions.Data;
+using Application.Abstractions.Messaging;
 using Application.Commands.EmployeeCommands;
-using Domain.DTOs;
+using Domain.Abstractions;
 using Domain.Features.Employee;
 using MediatR;
 
@@ -11,23 +12,23 @@ namespace Application.Handlers.EmployeeHandler
     /// </summary>
     /// <param name="employeeRepository"></param>
     public class DeleteEmployeeByIdHandler(IEmployeeRepository employeeRepository, IUnitOfWork unitOfWork) 
-        : IRequestHandler<DeleteEmployeeByIdCommand, ServiceResponse>
+        : ICommandHandler<DeleteEmployeeByIdCommand>
     {
         private readonly IEmployeeRepository _employeeRepository = employeeRepository;
 
-        public async Task<ServiceResponse> Handle(DeleteEmployeeByIdCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(DeleteEmployeeByIdCommand request, CancellationToken cancellationToken)
         {
-            var check = _employeeRepository.CheckExistsById(request.Id, cancellationToken);
-            if (check.Result == null)
+            var employee = await _employeeRepository.CheckExistsById(request.Id, cancellationToken);
+            if (employee == null)
             {
-                return new ServiceResponse(false, "User not found");
+                return Result.Failure(EmployeeErrors.NotFound(request.Id));
             }
 
-            var successfulResponse = await _employeeRepository.DeleteEmployee(check.Result, cancellationToken);
+            var successfulResponse = await _employeeRepository.DeleteEmployee(employee, cancellationToken);
 
             await unitOfWork.SaveChangesAsync(cancellationToken);
             
-            return successfulResponse;
+            return Result.Success();
         }
     }
 }

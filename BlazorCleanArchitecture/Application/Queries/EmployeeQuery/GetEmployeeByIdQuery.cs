@@ -1,10 +1,5 @@
-﻿using Domain.Features.Employee;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Abstractions.Messaging;
+using Domain.Features.Employee;
 
 namespace Application.Queries.EmployeeQuery
 {
@@ -12,5 +7,5 @@ namespace Application.Queries.EmployeeQuery
     /// Query for getting Employee with unique identifier
     /// </summary>
     /// <param name="Id"></param>
-    public record GetEmployeeByIdQuery(int Id) : IRequest<Employee>;
+    public record GetEmployeeByIdQuery(int Id) : IQuery<Employee>;
 }

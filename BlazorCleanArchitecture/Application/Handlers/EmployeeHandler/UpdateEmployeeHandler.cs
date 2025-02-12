@@ -1,8 +1,8 @@
 ﻿using Application.Abstractions.Data;
+using Application.Abstractions.Messaging;
 using Application.Commands.EmployeeCommands;
-using Domain.DTOs;
+using Domain.Abstractions;
 using Domain.Features.Employee;
-using MediatR;
 
 namespace Application.Handlers.EmployeeHandler
 {
@@ -11,23 +11,23 @@ namespace Application.Handlers.EmployeeHandler
     /// </summary>
     /// <param name="employeeRepository"></param>
     public class UpdateEmployeeHandler(IEmployeeRepository employeeRepository, IUnitOfWork unitOfWork)
-        : IRequestHandler<UpdateEmployeeCommand, ServiceResponse>
+        : ICommandHandler<UpdateEmployeeCommand>
     {
         private readonly IEmployeeRepository _employeeRepository = employeeRepository;
 
-        public async Task<ServiceResponse> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var check = await _employeeRepository.CheckExists(request.employee.Name, cancellationToken);
-            if (check != null)
+            var employee = await _employeeRepository.CheckExists(request.employee.Name, cancellationToken);
+            if (employee != null)
             {
-                return new ServiceResponse(false, "User already exists");
+                return  Result.Failure(EmployeeErrors.Exists(employee.Name));
             }
 
-            var serviceResponse = await _employeeRepository.UpdateEmployee(request.employee, cancellationToken);
+            await _employeeRepository.UpdateEmployee(request.employee, cancellationToken);
 
             await unitOfWork.SaveChangesAsync(cancellationToken);
             
-            return serviceResponse;
+            return Result.Success();
         }
     }
 }
