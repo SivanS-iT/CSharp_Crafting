@@ -1,11 +1,9 @@
 ﻿using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;
-using Application.Commands.EmployeeCommands;
 using Domain.Abstractions;
 using Domain.Features.Employee;
-using MediatR;
 
-namespace Application.Handlers.EmployeeHandler
+namespace Application.Employees.DeleteEmployee
 {
     /// <summary>
     /// Handler for deleting employee.

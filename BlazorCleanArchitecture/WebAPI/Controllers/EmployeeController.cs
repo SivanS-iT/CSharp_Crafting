@@ -1,5 +1,8 @@
-﻿using Application.Commands.EmployeeCommands;
-using Application.Queries.EmployeeQuery;
+﻿using Application.Employees.CreateEmployee;
+using Application.Employees.DeleteEmployee;
+using Application.Employees.GetEmployee;
+using Application.Employees.GetEmployees;
+using Application.Employees.UpdateEmployee;
 using Domain.Features.Employee;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

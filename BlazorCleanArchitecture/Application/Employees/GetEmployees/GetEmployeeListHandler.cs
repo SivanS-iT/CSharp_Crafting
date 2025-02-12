@@ -1,10 +1,8 @@
 ﻿using Application.Abstractions.Messaging;
-using Application.Queries.EmployeeQuery;
 using Domain.Abstractions;
 using Domain.Features.Employee;
-using MediatR;
 
-namespace Application.Handlers.EmployeeHandler
+namespace Application.Employees.GetEmployees
 {
     /// <summary>
     /// Handler for getting employees.

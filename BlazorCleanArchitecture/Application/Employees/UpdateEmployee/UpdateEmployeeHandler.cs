@@ -1,10 +1,9 @@
 ﻿using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;
-using Application.Commands.EmployeeCommands;
 using Domain.Abstractions;
 using Domain.Features.Employee;
 
-namespace Application.Handlers.EmployeeHandler
+namespace Application.Employees.UpdateEmployee
 {
     /// <summary>
     /// Handler for updating employee.

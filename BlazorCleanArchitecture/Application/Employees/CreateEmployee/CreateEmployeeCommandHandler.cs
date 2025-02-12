@@ -1,12 +1,9 @@
 ﻿using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;
-using Application.Commands.EmployeeCommands;
 using Domain.Abstractions;
-using Domain.DTOs;
 using Domain.Features.Employee;
-using MediatR;
 
-namespace Application.Handlers.EmployeeHandler
+namespace Application.Employees.CreateEmployee
 {
     /// <summary>
     /// Handler for creating employee.
