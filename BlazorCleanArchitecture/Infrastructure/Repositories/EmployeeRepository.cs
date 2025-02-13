@@ -35,7 +35,8 @@ namespace Infrastructure.Repositories
             var employee = new Employee
             {
                 Name = createEmployeeRequest.Name,
-                Address = createEmployeeRequest.Address
+                Address = createEmployeeRequest.Address,
+                Email = createEmployeeRequest.Email
             };
             appDbContext.Employees.AddAsync(employee, cancellationToken);
         }
