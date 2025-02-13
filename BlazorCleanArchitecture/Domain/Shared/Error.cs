@@ -1,4 +1,4 @@
-﻿namespace Domain.Abstractions;
+﻿namespace Domain.Shared;
 
 public record Error
 {

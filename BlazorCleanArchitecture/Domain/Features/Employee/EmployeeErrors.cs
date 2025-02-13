@@ -1,4 +1,4 @@
-using Domain.Abstractions;
+using Domain.Shared;
 
 namespace Domain.Features.Employee;
 
