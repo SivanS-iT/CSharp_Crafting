@@ -16,10 +16,10 @@ namespace Application.Employees.UpdateEmployee
 
         public async Task<Result> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var employee = await _employeeRepository.CheckExists(request.employee.Name, cancellationToken);
-            if (employee != null)
+            var employee = await _employeeRepository.CheckExistsById(request.employee.Id, cancellationToken);
+            if (employee == null)
             {
-                return  Result.Failure(EmployeeErrors.Exists(employee.Name));
+                return  Result.Failure(EmployeeErrors.NotFound(request.employee.Id));
             }
 
             _employeeRepository.UpdateEmployee(request.employee, cancellationToken);
