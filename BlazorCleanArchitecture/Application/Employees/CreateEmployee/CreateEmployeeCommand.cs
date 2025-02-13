@@ -1,5 +1,6 @@
 ﻿using Application.Abstractions.Messaging;
 using Domain.Features.Employee;
+using Domain.Shared;
 
 namespace Application.Employees.CreateEmployee
 {
@@ -7,5 +8,5 @@ namespace Application.Employees.CreateEmployee
     /// Command for Creating employees
     /// </summary>
     /// <param name="Employee"></param>
-    public sealed record CreateEmployeeCommand(CreateEmployeeRequest Employee) : ICommand;
+    public sealed record CreateEmployeeCommand(CreateEmployeeRequest Employee) : ICommand<int>;
 }
