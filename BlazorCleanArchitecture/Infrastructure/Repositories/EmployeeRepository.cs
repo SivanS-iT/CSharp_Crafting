@@ -6,10 +6,10 @@ namespace Infrastructure.Repositories
 {
     public class EmployeeRepository(AppDbContext appDbContext) : IEmployeeRepository
     {
-        public async Task<Employee?> CheckExists(string name, CancellationToken cancellationToken)
+        public async Task<Employee?> CheckExists(string email, CancellationToken cancellationToken)
         {
             return await appDbContext.Employees.FirstOrDefaultAsync(
-                u => u.Name.ToLower().Equals(name.ToLower()), cancellationToken);
+                u => u.Email.ToLower().Equals(email.ToLower()), cancellationToken);
         }
 
         public async Task<Employee?> CheckExistsById(int employeeId, CancellationToken cancellationToken)
@@ -46,7 +46,7 @@ namespace Infrastructure.Repositories
             appDbContext.Update(employee);
         }
 
-        public async void DeleteEmployee(Employee employee, CancellationToken cancellationToken)
+        public void DeleteEmployee(Employee employee, CancellationToken cancellationToken)
         { 
             appDbContext.Employees.Remove(employee);
         }

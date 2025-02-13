@@ -14,10 +14,10 @@ namespace Application.Employees.CreateEmployee
     {
         public async Task<Result> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var employee = await employeeRepository.CheckExists(request.Employee.Name, cancellationToken);
+            var employee = await employeeRepository.CheckExists(request.Employee.Email, cancellationToken);
             if (employee != null)
             {
-                return  Result.Failure(EmployeeErrors.Exists(employee.Name));
+                return  Result.Failure(EmployeeErrors.Exists(employee.Email));
             }
 
             employeeRepository.CreateEmployee(request.Employee, cancellationToken);
