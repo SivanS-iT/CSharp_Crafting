@@ -1,7 +1,7 @@
 ﻿using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;
-using Domain.Abstractions;
 using Domain.Features.Employee;
+using Domain.Shared;
 
 namespace Application.Employees.GetEmployee
 {
