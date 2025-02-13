@@ -7,5 +7,5 @@ namespace Application.Employees.UpdateEmployee
     /// Update emplyee command
     /// </summary>
     /// <param name="employee"></param>
-    public record UpdateEmployeeCommand(Employee employee) : ICommand;
+    public sealed record UpdateEmployeeCommand(Employee employee) : ICommand;
 }

@@ -7,5 +7,5 @@ namespace Application.Employees.GetEmployee
     /// Query for getting Employee with unique identifier
     /// </summary>
     /// <param name="Id"></param>
-    public record GetEmployeeByIdQuery(int Id) : IQuery<Employee>;
+    public sealed record GetEmployeeByIdQuery(int Id) : IQuery<Employee>;
 }
