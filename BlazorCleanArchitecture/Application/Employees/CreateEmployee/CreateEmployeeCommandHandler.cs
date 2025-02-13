@@ -10,21 +10,22 @@ namespace Application.Employees.CreateEmployee
     /// </summary>
     /// <param name="employeeRepository"></param>
     public class CreateEmployeeCommandHandler(IEmployeeRepository employeeRepository, IUnitOfWork unitOfWork)
-        : ICommandHandler<CreateEmployeeCommand>
+        : ICommandHandler<CreateEmployeeCommand, int>
     {
-        public async Task<Result> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
+        public async Task<Result<int>> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
             var employee = await employeeRepository.CheckExists(request.Employee.Email, cancellationToken);
             if (employee != null)
             {
-                return  Result.Failure(EmployeeErrors.Exists(employee.Email));
+                return  Result.Failure<int>(EmployeeErrors.Exists(employee.Email));
             }
 
             employeeRepository.CreateEmployee(request.Employee, cancellationToken);
-
             await unitOfWork.SaveChangesAsync(cancellationToken);
             
-            return Result.Success();
+            var createdEmployee = await employeeRepository.CheckExists(request.Employee.Email, cancellationToken);
+
+            return Result.Success<int>(createdEmployee.Id);
         }
     }
 }
