@@ -35,8 +35,6 @@ namespace Application.UnitTests.Employees.Commands
             Email = "TestingEmail"
         };
         private static readonly Employee? employeeAsNull = null;
-        private static readonly string employeeExistsMessage = "User already exists";
-        private static readonly string employeeAdded = "User added";
 
 
 
@@ -55,7 +53,7 @@ namespace Application.UnitTests.Employees.Commands
         }
 
 
-        /*[Fact]
+        [Fact]
         public async void Handle_Should_ReturnTrueResult_WhenCreateEmployeeEmailDoesNotExist()
         {
             // Arrange
@@ -66,7 +64,7 @@ namespace Application.UnitTests.Employees.Commands
 
             // Assert
             result.IsSuccess.Should().BeTrue();
-        }*/
+        }
 
 
 
@@ -94,7 +92,7 @@ namespace Application.UnitTests.Employees.Commands
             await _createEmployeeCommandHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
-            _employeeRpositoryMock.Received(1).CreateEmployee(Arg.Is<CreateEmployeeRequest>(e => e == employeeTestRequest), default);
+            await  _employeeRpositoryMock.Received(1).Add(Arg.Any<Employee>(), default);
         }
 
     }

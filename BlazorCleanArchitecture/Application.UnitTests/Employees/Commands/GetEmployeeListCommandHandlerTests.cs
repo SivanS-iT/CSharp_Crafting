@@ -26,7 +26,6 @@ namespace Application.UnitTests.Employees.Commands
             _getEmployeeListHandler = new GetEmployeeListHandler(_employeeRpositoryMock);
             _getEmployeeCommand = new GetEmployeeListQuery();
         }
-        private static readonly Employee? employeeAsNull = null;
 
 
 
@@ -37,7 +36,7 @@ namespace Application.UnitTests.Employees.Commands
         public async void Handle_Should_ReturnEmployeeList()
         {
             // Arrange
-            _employeeRpositoryMock.GetEmployees(default).Returns(employeeTestList);
+            _employeeRpositoryMock.GetAll(default).Returns(employeeTestList);
 
             // Act
             var result = await _getEmployeeListHandler.Handle(_getEmployeeCommand, default);
@@ -58,7 +57,7 @@ namespace Application.UnitTests.Employees.Commands
             await _getEmployeeListHandler.Handle(_getEmployeeCommand, default);
 
             // Assert
-            await _employeeRpositoryMock.Received(1).GetEmployees(default);
+            await _employeeRpositoryMock.Received(1).GetAll(default);
         }
 
     }

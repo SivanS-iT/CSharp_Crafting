@@ -55,7 +55,7 @@ namespace Application.UnitTests.Employees.Commands
         {
             // Arrange
             _employeeRpositoryMock.CheckExistsById(employeeTest.Id, default).Returns(employeeTest);
-            _employeeRpositoryMock.GetEmployeeById(employeeTest.Id, default).Returns(employeeTest);
+            _employeeRpositoryMock.GetById(employeeTest.Id, default).Returns(employeeTest);
 
             // Act
             var result = await _getEmployeeByIdHandler.Handle(_getEmployeeCommand, default);
@@ -81,7 +81,7 @@ namespace Application.UnitTests.Employees.Commands
             var result = await _getEmployeeByIdHandler.Handle(_getEmployeeCommand, default);
 
             // Assert
-            await _employeeRpositoryMock.Received(1).GetEmployeeById(Arg.Is<int>(e => e == employeeTest.Id), default);
+            await _employeeRpositoryMock.Received(1).GetById(Arg.Is<int>(e => e == employeeTest.Id), default);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Application.Employees.CreateEmployee
 
             };
 
-            employeeRepository.Add(addEmployee, cancellationToken);
+            await employeeRepository.Add(addEmployee, cancellationToken);
             await unitOfWork.SaveChangesAsync(cancellationToken);
             
             return Result.Success<int>(addEmployee.Id);
