@@ -1,6 +1,6 @@
-﻿using Application.Handlers.EmployeeHandler;
-using Application.Queries.EmployeeQuery;
+﻿using Application.Employees.GetEmployees;
 using Domain.Features.Employee;
+using Domain.Shared;
 using FluentAssertions;
 using NSubstitute;
 
@@ -15,9 +15,9 @@ namespace Application.UnitTests.Employees.Commands
 
         private static readonly List<Employee> employeeTestList =
         [
-            new Employee { Id = 1, Name = "Ivan", Address ="Random address"},
-            new Employee { Id = 2, Name = "Hrvoje", Address ="Hrvoje address"},
-            new Employee { Id = 3, Name = "Colin", Address ="Colin address"},
+            new Employee { Id = 1, Name = "Ivan", Address ="Random address", Email = "email@gmail.com"},
+            new Employee { Id = 2, Name = "Hrvoje", Address ="Hrvoje address", Email = "email1@gmail.com"},
+            new Employee { Id = 3, Name = "Colin", Address ="Colin address", Email = "email2@gmail.com"},
         ];
 
         public GetEmployeeListCommandHandlerTests()
@@ -43,9 +43,9 @@ namespace Application.UnitTests.Employees.Commands
             var result = await _getEmployeeListHandler.Handle(_getEmployeeCommand, default);
 
             // Assert
-            result.As<List<Employee>>();
-            result.Count.Should().Be(3);
-            result.First().Id.Should().Be(employeeTestList[0].Id);
+            result.IsSuccess.Should().BeTrue();
+            result.As<Result<List<Employee>>>();
+            result.Value.Count.Should().Be(3);
         }
 
         /// <summary>

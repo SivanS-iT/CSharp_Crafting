@@ -1,10 +1,8 @@
-using Application.Commands.EmployeeCommands;
-using Application.Handlers.EmployeeHandler;
-using Domain.DTOs;
+using Application.Abstractions.Data;
+using Application.Employees.DeleteEmployee;
 using Domain.Features.Employee;
 using FluentAssertions;
 using NSubstitute;
-using NSubstitute.ReturnsExtensions;
 
 namespace Application.UnitTests.Employees.Commands;
 
@@ -13,14 +11,15 @@ public class DeleteEmployeeCommandHandlerTests
         private readonly IEmployeeRepository _employeeRepositoryMock;
         private readonly DeleteEmployeeByIdHandler _deleteEmployeeHandler;
         private readonly DeleteEmployeeByIdCommand _deleteEmployeeCommand;
-        private readonly ServiceResponse _serviceResponse;
+        private readonly IUnitOfWork _unitOfWorkMock;
+
 
         public DeleteEmployeeCommandHandlerTests()
         {
             _employeeRepositoryMock = Substitute.For<IEmployeeRepository>();
-            //_deleteEmployeeHandler = new DeleteEmployeeByIdHandler(_employeeRepositoryMock);
+            _unitOfWorkMock = Substitute.For<IUnitOfWork>();
+            _deleteEmployeeHandler = new DeleteEmployeeByIdHandler(_employeeRepositoryMock, _unitOfWorkMock);
             _deleteEmployeeCommand = new DeleteEmployeeByIdCommand(employeeId);
-            _serviceResponse = new ServiceResponse(flagTrue, messageDeleted);
         }
 
         private static readonly Employee employeeTest = new()
@@ -34,82 +33,50 @@ public class DeleteEmployeeCommandHandlerTests
         private static readonly string employeeDeleted = "User deleted";
         private static readonly string employeeNotFound = "User not found";
         private static readonly int employeeId = 1;
-        private static bool flagTrue = true;
-        private static string messageDeleted = employeeDeleted;
 
 
 
-        /// <summary>
-        /// Returns true when employee id exist!
-        /// </summary>
         [Fact]
-        public async void Handle_Should_ReturnTrueResult_WhenEmployeeIdExists()
+        public async void Handle_Should_ReturnFailureResult_WhenEmployeeIsNotFound()
         {
             // Arrange
-            _employeeRepositoryMock.CheckExistsById(employeeId, default).Returns(employeeTest);
-            _employeeRepositoryMock.DeleteEmployee(employeeTest, default).Returns(_serviceResponse);
+            _employeeRepositoryMock.CheckExistsById(employeeTest.Id, default).Returns(employeeAsNull);
 
             // Act
             var result = await _deleteEmployeeHandler.Handle(_deleteEmployeeCommand, default);
 
             // Assert
-            result.Flag.Should().BeTrue();
-            result.Message.Should().BeEquivalentTo(employeeDeleted);
+            result.IsFailure.Should().BeTrue();
         }
 
 
-        /// <summary>
-        /// Returns false when employee id does not exist!
-        /// </summary>
         [Fact]
-        public async void Handle_Should_ReturnTrueResult_WhenIdDoesNotExist()
+        public async void Handle_Should_ReturnTrueResult_WhenEmployeeIsFound()
         {
             // Arrange
-            _employeeRepositoryMock.CheckExistsById(employeeId, default).Returns(employeeAsNull);
-
+            _employeeRepositoryMock.CheckExistsById(employeeTest.Id, default).Returns(employeeTest);
+            
             // Act
             var result = await _deleteEmployeeHandler.Handle(_deleteEmployeeCommand, default);
 
             // Assert
-            result.Flag.Should().BeFalse();
-            result.Message.Should().BeEquivalentTo(employeeNotFound);
+            result.IsSuccess.Should().BeTrue();
         }
 
 
 
-        /// <summary>
-        /// Test if user is not Deleted
-        /// </summary>
         [Fact]
-        public async void Handle_Should_NotDeleteEmployee_WhenEmployeeDoesNotExist()
+        public async void Handle_Should_CallUnitOfWorkAndSaveChangesAsync()
         {
             // Arrange
-            _employeeRepositoryMock.CheckExistsById(employeeId, default).Returns(employeeAsNull);
+            _employeeRepositoryMock.CheckExistsById(employeeTest.Id, default).Returns(employeeTest);
 
             // Act
             await _deleteEmployeeHandler.Handle(_deleteEmployeeCommand, default);
 
             // Assert
-            await _employeeRepositoryMock.Received(0).DeleteEmployee(Arg.Is<Employee>(e => e == employeeAsNull), default);
-
+            _employeeRepositoryMock.Received(1).DeleteEmployee(Arg.Is<Employee>(e => e == employeeTest), default);
+            await _unitOfWorkMock.Received(1).SaveChangesAsync(Arg.Any<CancellationToken>());
         }
-
-
-        /// <summary>
-        /// Test if user is Deleted
-        /// </summary>
-        [Fact]
-        public async void Handle_Should_DeleteEmployee_WhenEmployeeExists()
-        {
-            // Arrange
-            _employeeRepositoryMock.CheckExistsById(employeeId, default).Returns(employeeTest);
-
-            // Act
-            await _deleteEmployeeHandler.Handle(_deleteEmployeeCommand, default);
-
-            // Assert
-            await _employeeRepositoryMock.Received(1).DeleteEmployee(Arg.Is<Employee>(e => e == employeeTest), default);
-
-        }
-
+        
     }

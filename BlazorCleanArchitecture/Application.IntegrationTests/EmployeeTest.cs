@@ -1,6 +1,7 @@
-using Application.Commands.EmployeeCommands;
-using Application.Queries.EmployeeQuery;
-using Domain.DTOs;
+using Application.Employees.CreateEmployee;
+using Application.Employees.GetEmployee;
+using Application.Employees.GetEmployees;
+using Application.IntegrationTests.Abstractions;
 using Domain.Features.Employee;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
@@ -14,12 +15,14 @@ public class EmployeeTest : BaseIntegrationTest
     {
         Address = "Testing",
         Name = "sdfsdf",
+        Email = "thisIsEmail@gmail.com"
     };
     private static readonly Employee updateEmployee = new()
     {
         Id = 1,
         Address = "Testing",
         Name = "newName",
+        Email = "mail@gmail.com"
     };
     private int _getEmpById = 1;
     
@@ -33,7 +36,7 @@ public class EmployeeTest : BaseIntegrationTest
 
     // GetList ------------------------------------------------------
     [Fact]
-    public async Task GetList_ShouldReturnEmployee_WhenEmployeesExists()
+    public async Task GetList_ShouldReturnEmployees_WhenEmployeesExist()
     {
         // Arrange
         var empList = new GetEmployeeListQuery();
@@ -45,8 +48,8 @@ public class EmployeeTest : BaseIntegrationTest
         var query = await Sender.Send(empList);
 
         // Assert
-        Assert.NotEmpty(query);
-        query.Count.Should().Be(1);
+        Assert.NotEmpty(query.Value);
+        query.Value.Count.Should().Be(1);
     }
     
     
@@ -90,7 +93,7 @@ public class EmployeeTest : BaseIntegrationTest
         var response = await Sender.Send(createEmpCommand);
         
         // Assert
-        //Assert.True(response.Flag);
+        Assert.True(response.IsSuccess);
     }
     
     
