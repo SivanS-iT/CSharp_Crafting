@@ -2,7 +2,7 @@ using Infrastructure.Data;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application.IntegrationTests;
+namespace Application.IntegrationTests.Abstractions;
 
 public abstract class BaseIntegrationTest : IClassFixture<IntegrationTestWebAppFactory>
 {

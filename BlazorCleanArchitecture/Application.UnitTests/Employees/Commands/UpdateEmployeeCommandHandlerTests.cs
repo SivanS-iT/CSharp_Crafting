@@ -1,5 +1,5 @@
-﻿using Application.Commands.EmployeeCommands;
-using Application.Handlers.EmployeeHandler;
+﻿using Application.Abstractions.Data;
+using Application.Employees.UpdateEmployee;
 using Domain.Features.Employee;
 using FluentAssertions;
 using NSubstitute;
@@ -10,13 +10,15 @@ namespace Application.UnitTests.Employees.Commands
     public class UpdateEmployeeCommandHandlerTests
     {
         private readonly IEmployeeRepository _employeeRpositoryMock;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly UpdateEmployeeHandler _updateEmployeeHandler;
         private readonly UpdateEmployeeCommand _updateEmployeeCommand;
-
+        
         public UpdateEmployeeCommandHandlerTests()
         {
             _employeeRpositoryMock = Substitute.For<IEmployeeRepository>();
-            //_updateEmployeeHandler = new UpdateEmployeeHandler(_employeeRpositoryMock);
+            _unitOfWork = Substitute.For<IUnitOfWork>();
+            _updateEmployeeHandler = new UpdateEmployeeHandler(_employeeRpositoryMock, _unitOfWork);
             _updateEmployeeCommand = new UpdateEmployeeCommand(employeeTest);
         }
 
@@ -30,78 +32,49 @@ namespace Application.UnitTests.Employees.Commands
         private static readonly string employeeExistsMessage = "User already exists";
         private static readonly string employeeUpdated = "User updated";
 
-
-
-        /// <summary>
-        /// Returns false when employee does exist!
-        /// </summary>
         [Fact]
-        public async void Handle_Should_ReturnFailureResult_WhenUpdateEmployeeNameExists()
+        public async void Handle_Should_ReturnFailureResult_WhenEmployeeIsNotFound()
         {
             // Arrange
-            _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeTest);
+            _employeeRpositoryMock.CheckExistsById(employeeTest.Id, default).Returns(employeeAsNull);
 
             // Act
             var result = await _updateEmployeeHandler.Handle(_updateEmployeeCommand, default);
 
             // Assert
-            result.Flag.Should().BeFalse();
-            result.Message.Should().BeEquivalentTo(employeeExistsMessage);
+            result.IsFailure.Should().BeTrue();
         }
 
 
-        /// <summary>
-        /// Returns true when employee does not exists!
-        /// </summary>
         [Fact]
-        public async void Handle_Should_ReturnTrueResult_WhenUpdateEmployeeNameDoesNotExist()
+        public async void Handle_Should_ReturnTrueResult_WhenEmployeeIsFound()
         {
             // Arrange
-            _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeAsNull);
+            _employeeRpositoryMock.CheckExistsById(employeeTest.Id, default).Returns(employeeTest);
+            
+            // Act
+            var result = await _updateEmployeeHandler.Handle(_updateEmployeeCommand, default);
+
+            // Assert
+            result.IsSuccess.Should().BeTrue();
+        }
+
+
+
+        [Fact]
+        public async void Handle_Should_CallUnitOfWorkAndSaveChangesAsync()
+        {
+            // Arrange
+            _employeeRpositoryMock.CheckExistsById(employeeTest.Id, default).Returns(employeeTest);
 
             // Act
             var result = await _updateEmployeeHandler.Handle(_updateEmployeeCommand, default);
 
             // Assert
-            result.Should().ReturnsNull();
+            _employeeRpositoryMock.Received(1).UpdateEmployee(Arg.Is<Employee>(e => e == employeeTest), default);
+            await _unitOfWork.Received(1).SaveChangesAsync(Arg.Any<CancellationToken>());
         }
 
-
-
-        /// <summary>
-        /// Test if user is not updated
-        /// </summary>
-        [Fact]
-        public async void Handle_Should_NotUpdateEmployee_WhenEmployeeExists()
-        {
-            // Arrange
-            _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeTest);
-
-            // Act
-            await _updateEmployeeHandler.Handle(_updateEmployeeCommand, default);
-
-            // Assert
-            await _employeeRpositoryMock.Received(0).UpdateEmployee(Arg.Is<Employee>(e => e == employeeTest), default);
-
-        }
-
-
-        /// <summary>
-        /// Test if user is updated
-        /// </summary>
-        [Fact]
-        public async void Handle_Should_UpdateEmployee_WhenEmployeeDoesNotExist()
-        {
-            // Arrange
-            _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeAsNull);
-
-            // Act
-            await _updateEmployeeHandler.Handle(_updateEmployeeCommand, default);
-
-            // Assert
-            await _employeeRpositoryMock.Received(1).UpdateEmployee(Arg.Is<Employee>(e => e == employeeTest), default);
-
-        }
 
     }
 }
