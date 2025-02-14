@@ -14,18 +14,24 @@ namespace Application.Employees.CreateEmployee
     {
         public async Task<Result<int>> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var employee = await employeeRepository.CheckExists(request.Employee.Email, cancellationToken);
-            if (employee != null)
+            var employeeExists = await employeeRepository.CheckExists(request.Employee.Email, cancellationToken);
+            if (employeeExists != null)
             {
-                return  Result.Failure<int>(EmployeeErrors.Exists(employee.Email));
+                return  Result.Failure<int>(EmployeeErrors.Exists(employeeExists.Email));
             }
 
-            employeeRepository.CreateEmployee(request.Employee, cancellationToken);
+            var addEmployee = new Employee()
+            {
+                Name = request.Employee.Name,
+                Address = request.Employee.Address,
+                Email = request.Employee.Email
+
+            };
+
+            employeeRepository.Add(addEmployee, cancellationToken);
             await unitOfWork.SaveChangesAsync(cancellationToken);
             
-            var createdEmployee = await employeeRepository.CheckExists(request.Employee.Email, cancellationToken);
-
-            return Result.Success<int>(createdEmployee.Id);
+            return Result.Success<int>(addEmployee.Id);
         }
     }
 }

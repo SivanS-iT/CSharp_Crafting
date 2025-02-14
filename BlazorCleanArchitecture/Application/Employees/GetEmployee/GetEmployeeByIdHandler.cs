@@ -22,7 +22,7 @@ namespace Application.Employees.GetEmployee
                 return Result.Failure<Employee>(EmployeeErrors.NotFound(request.Id));
             }
 
-            var response = await _employeeRepository.GetEmployeeById(employee.Id, cancellationToken);
+            var response = await _employeeRepository.GetById(employee.Id, cancellationToken);
             
             return Result.Success<Employee>(response);   }
     }
