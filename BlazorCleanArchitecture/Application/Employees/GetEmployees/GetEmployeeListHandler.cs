@@ -14,7 +14,7 @@ namespace Application.Employees.GetEmployees
 
         public async Task<Result<List<Employee>>> Handle(GetEmployeeListQuery request, CancellationToken cancellationToken)
         {
-            return await _employeeRepository.GetEmployees(cancellationToken);
+            return await _employeeRepository.GetAll(cancellationToken);
         }
     }
 }

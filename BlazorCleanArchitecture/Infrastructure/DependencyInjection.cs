@@ -1,7 +1,9 @@
 using Application.Abstractions.Data;
+using Domain.Abstractions;
 using Domain.Features.Employee;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
+using Infrastructure.Repositories.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

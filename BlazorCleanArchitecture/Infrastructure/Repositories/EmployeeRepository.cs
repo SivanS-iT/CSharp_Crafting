@@ -1,10 +1,11 @@
 ﻿using Domain.Features.Employee;
 using Infrastructure.Data;
+using Infrastructure.Repositories.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class EmployeeRepository(AppDbContext appDbContext) : IEmployeeRepository
+    internal class EmployeeRepository(AppDbContext appDbContext) : GenericRepository<Employee>(appDbContext), IEmployeeRepository
     {
         public async Task<Employee?> CheckExists(string email, CancellationToken cancellationToken)
         {
@@ -18,37 +19,6 @@ namespace Infrastructure.Repositories
                 cancellationToken: cancellationToken);
         }
 
-        public async Task<List<Employee>> GetEmployees(CancellationToken cancellationToken)
-        {
-            return await appDbContext.Employees.ToListAsync(cancellationToken: cancellationToken);
-        }
-
-        public async Task<Employee?> GetEmployeeById(int employeeId, CancellationToken cancellationToken)
-        {
-            return await appDbContext.Employees.FindAsync(new object?[] { employeeId, cancellationToken },
-                cancellationToken: cancellationToken);
-        }
-
-        public void CreateEmployee(CreateEmployeeRequest createEmployeeRequest,
-            CancellationToken cancellationToken)
-        {
-            var employee = new Employee
-            {
-                Name = createEmployeeRequest.Name,
-                Address = createEmployeeRequest.Address,
-                Email = createEmployeeRequest.Email
-            };
-            appDbContext.Employees.AddAsync(employee, cancellationToken);
-        }
-
-        public void UpdateEmployee(Employee employee, CancellationToken cancellationToken)
-        { 
-            appDbContext.Update(employee);
-        }
-
-        public void DeleteEmployee(Employee employee, CancellationToken cancellationToken)
-        { 
-            appDbContext.Employees.Remove(employee);
-        }
+        
     }
 }
