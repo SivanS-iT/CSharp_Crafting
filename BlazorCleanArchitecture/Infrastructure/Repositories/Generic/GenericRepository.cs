@@ -21,17 +21,17 @@ internal abstract class GenericRepository<TEntity>(AppDbContext dbContext)
         return await DbContext.Set<TEntity>().ToListAsync(cancellationToken);
     }
 
-    public void Add(TEntity entity, CancellationToken cancellationToken)
+    public async Task Add(TEntity entity, CancellationToken cancellationToken)
     {
-        DbContext.Set<TEntity>().Add(entity);
+        await DbContext.Set<TEntity>().AddAsync(entity, cancellationToken);
     }
 
-    public void Update(TEntity entity, CancellationToken cancellationToken )
+    public void Update(TEntity entity)
     {
         DbContext.Set<TEntity>().Update(entity);
     }
 
-    public void Delete(TEntity entity, CancellationToken cancellationToken )
+    public void Delete(TEntity entity)
     {
         DbContext.Set<TEntity>().Remove(entity);
     }

@@ -22,7 +22,7 @@ namespace Application.Employees.DeleteEmployee
                 return Result.Failure(EmployeeErrors.NotFound(request.Id));
             }
 
-            _employeeRepository.Delete(employee, cancellationToken);
+            _employeeRepository.Delete(employee);
 
             await unitOfWork.SaveChangesAsync(cancellationToken);
             
