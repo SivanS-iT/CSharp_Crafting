@@ -30,8 +30,6 @@ public class DeleteEmployeeCommandHandlerTests
         };
 
         private static readonly Employee? employeeAsNull = null;
-        private static readonly string employeeDeleted = "User deleted";
-        private static readonly string employeeNotFound = "User not found";
         private static readonly int employeeId = 1;
 
 
@@ -75,7 +73,7 @@ public class DeleteEmployeeCommandHandlerTests
             await _deleteEmployeeHandler.Handle(_deleteEmployeeCommand, default);
 
             // Assert
-            _employeeRepositoryMock.Received(1).DeleteEmployee(Arg.Is<Employee>(e => e == employeeTest), default);
+            _employeeRepositoryMock.Received(1).Delete(Arg.Is<Employee>(e => e == employeeTest));
             await _unitOfWorkMock.Received(1).SaveChangesAsync(Arg.Any<CancellationToken>());
         }
         

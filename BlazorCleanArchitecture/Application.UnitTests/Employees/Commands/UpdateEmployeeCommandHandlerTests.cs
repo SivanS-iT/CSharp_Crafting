@@ -29,8 +29,6 @@ namespace Application.UnitTests.Employees.Commands
             Name = "Ivan",
         };
         private static readonly Employee? employeeAsNull = null;
-        private static readonly string employeeExistsMessage = "User already exists";
-        private static readonly string employeeUpdated = "User updated";
 
         [Fact]
         public async void Handle_Should_ReturnFailureResult_WhenEmployeeIsNotFound()
@@ -60,7 +58,6 @@ namespace Application.UnitTests.Employees.Commands
         }
 
 
-
         [Fact]
         public async void Handle_Should_CallUnitOfWorkAndSaveChangesAsync()
         {
@@ -71,10 +68,8 @@ namespace Application.UnitTests.Employees.Commands
             var result = await _updateEmployeeHandler.Handle(_updateEmployeeCommand, default);
 
             // Assert
-            _employeeRpositoryMock.Received(1).UpdateEmployee(Arg.Is<Employee>(e => e == employeeTest), default);
+            _employeeRpositoryMock.Received(1).Update(Arg.Is<Employee>(e => e == employeeTest));
             await _unitOfWork.Received(1).SaveChangesAsync(Arg.Any<CancellationToken>());
         }
-
-
     }
 }
