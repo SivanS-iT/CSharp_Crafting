@@ -1,10 +1,5 @@
 using Application;
-using Application.Abstractions.Data;
-using Application.Employees.GetEmployees;
-using Domain.Features.Employee;
 using Infrastructure;
-using Infrastructure.Data;
-using Infrastructure.Repositories;
 using Microsoft.Net.Http.Headers;
 using WebApi.Extensions;
 
