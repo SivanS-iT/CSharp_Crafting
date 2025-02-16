@@ -1,30 +1,15 @@
-using Application.Employees.CreateEmployee;
+using Application.Employees.DeleteEmployee;
 using Application.Employees.GetEmployee;
 using Application.Employees.GetEmployees;
+using Application.Employees.UpdateEmployee;
 using Application.IntegrationTests.Abstractions;
 using Domain.Features.Employee;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
-using Npgsql;
 
 namespace Application.IntegrationTests;
 
 public class EmployeeTest : BaseIntegrationTest
 {
-    private static readonly CreateEmployeeRequest employeeTestRequest = new()
-    {
-        Address = "Testing",
-        Name = "sdfsdf",
-        Email = "thisIsEmail@gmail.com"
-    };
-    private static readonly Employee updateEmployee = new()
-    {
-        Id = 1,
-        Address = "Testing",
-        Name = "newName",
-        Email = "mail@gmail.com"
-    };
-    private int _getEmpById = 1;
     
     /// <summary>
     /// Constructor
@@ -33,98 +18,164 @@ public class EmployeeTest : BaseIntegrationTest
     public EmployeeTest(IntegrationTestWebAppFactory factory) : base(factory)
     {
     }
-
-    // GetList ------------------------------------------------------
-    [Fact]
-    public async Task GetList_ShouldReturnEmployees_WhenEmployeesExist()
-    {
-        // Arrange
-        var empList = new GetEmployeeListQuery();
-        employeeTestRequest.Name = "NewEmployee";
-        var createEmpCommand = new CreateEmployeeCommand(employeeTestRequest);
-        await Sender.Send(createEmpCommand);
-
-        // Act
-        var query = await Sender.Send(empList);
-
-        // Assert
-        Assert.NotEmpty(query.Value);
-        query.Value.Count.Should().Be(1);
-    }
     
     
-    //Get EmployeeById --------------------------------------------------
-    [Fact]
-    public async Task GetById_ShouldReturnEmployee_WhenEmplyeeExists()
-    {
-        // Arrange
-        var empById = new GetEmployeeByIdQuery(_getEmpById);
-        
-        // Ack
-        var query = await Sender.Send(empById);
-        
-        // Assert
-        Assert.NotNull(query);
-    }
-    
-    [Fact]
-    public async Task GetById_ShouldNotReturnEmployee_WhenEmplyeeDoesNotExists()
-    {
-        // Arrange
-        var empByIdCommand = new GetEmployeeByIdQuery(10);
-        
-        // Ack
-        var query = await Sender.Send(empByIdCommand);
-        
-        // Assert
-        Assert.Null(query);
-    }
-    
-    
-    // Create Employee ------------------------------------
+    #region Create Employee
+   
     [Fact]
     public async Task Create_ShouldAddEmployee_WhenCommandIsValid()
     {
         // Arrange
-        employeeTestRequest.Name = "NewEmployee";
-        var createEmpCommand = new CreateEmployeeCommand(employeeTestRequest);
-        
-        // Ack
-        var response = await Sender.Send(createEmpCommand);
+        var response = await CreateEmployeeAsync();
         
         // Assert
         Assert.True(response.IsSuccess);
     }
     
+    [Fact]
+    public async Task Create_ShouldAddNotEmployee_WhenEmailAllreadyExits()
+    {
+        // Arrange
+        await CreateEmployeeAsync(
+            "Employee",
+            "EmployeeAddress",
+            "EmployeeEmail");
+        var response = await CreateEmployeeAsync(
+            "Employee2",
+            "EmployeeAddress2",
+            "EmployeeEmail");
+        
+        // Assert
+        Assert.True(response.IsFailure);
+    }
+
+    #endregion
     
+    #region Get Employee
     
+    [Fact]
+    public async Task GetById_ShouldReturnEmployee_WhenEmplyeeExists()
+    {
+        // Arrange
+        var employeeId = await CreateEmployeeAsync("Ivan3", "NewAddress", "Mail");
+        var getEmployeeById = new GetEmployeeByIdQuery(employeeId.Value);
+        
+        // Ack
+        var response = await Sender.Send(getEmployeeById);
+        
+        // Assert
+        Assert.NotNull(response);
+    }
     
-    /*
-    // Update Employee
+    [Fact]
+    public async Task GetById_ShouldNotReturnEmployee_WhenEmployeeDoesNotExists()
+    {
+        // Arrange
+        var empById = new GetEmployeeByIdQuery(10);
+
+        // Ack
+        var response = await Sender.Send(empById);
+
+        // Assert
+        response.IsFailure.Should().BeTrue();
+    }
+    #endregion
+
+    #region Get Employees
+
+    [Fact]
+    public async Task GetList_ShouldReturnEmployees_WhenEmployeesExist()
+    {
+        // Arrange
+        await CreateEmployeesAsync();
+        var getEmployeeList = new GetEmployeeListQuery();
+
+        // Act
+        var response = await Sender.Send(getEmployeeList);
+
+        // Assert
+        Assert.NotEmpty(response.Value);
+    }
+    #endregion
+    
+    #region Update Employee
+
     [Fact]
     public async Task Update_ShouldUpdateEmployee_WhenEmplyeeDoesExists()
     {
         // Arrange
-        var updateEmployeeCommand = new UpdateEmployeeCommand(updateEmployee);
+        var employeeId = await CreateEmployeeAsync("Ivan4", "NewAddress4", "Mail4");
+        var existingEmployee = await DbContext.Employees.FindAsync(employeeId.Value);
+        if (existingEmployee != null)
+        {
+            existingEmployee.Address = "AddressUpdate";
+            existingEmployee.Name = "NameUpdate";
+            existingEmployee.Email = "mailUpdate@gmail.com";
+    
+        }
+        var updateEmployeeCommand = new UpdateEmployeeCommand(existingEmployee);
         
         // Ack
         var response = await Sender.Send(updateEmployeeCommand);
         
         // Assert
-        Assert.True(response.Flag);
+        Assert.True(response.IsSuccess);
     }
     
+    [Fact]
+    public async Task Update_ShouldNotUpdateEmployee_WhenEmplyeeDoesNotExists()
+    {
+        // Arrange
+        var employee = new Employee()
+        {
+            Id = NotExistingEmployee,
+            Name = "NewName",
+            Address = "NewAddress",
+            Email = "NewEmail"
+        };
+        
+        var updateEmployeeCommand = new UpdateEmployeeCommand(employee);
+        
+        // Ack
+        var response = await Sender.Send(updateEmployeeCommand);
+        
+        // Assert
+        Assert.True(response.IsFailure);
+        response.Error.Should().Be(EmployeeErrors.NotFound(employee.Id));
+    }
+
+    #endregion
+
+    #region Delete Employee
+
     // Delete Emplyee
     [Fact]
     public async Task Delete_ShouldDeleteEmployee_WhenEmplyeeDoesExists()
     {
         // Arrange
-        var deleteEmployeeCommand = new DeleteEmployeeByIdCommand(1);
+        var employeeId = await CreateEmployeeAsync("Ivan5", "NewAddress5", "Mail5");
+        var deleteEmployeeCommand = new DeleteEmployeeByIdCommand(employeeId.Value);
         
         // Ack
         var response = await Sender.Send(deleteEmployeeCommand);
         
         // Assert
-        Assert.True(response.Flag);
-    }*/
+        Assert.True(response.IsSuccess);
+    }
+
+    [Fact]
+    public async Task Delete_ShouldNotDeleteEmployee_WhenEmployeeDoesNotExists()
+    {
+        // Arrange
+        var deleteEmployeeCommand = new DeleteEmployeeByIdCommand(NotExistingEmployee);
+        
+        // Ack
+        var response = await Sender.Send(deleteEmployeeCommand);
+        
+        // Assert
+        Assert.True(response.IsFailure);
+        response.Error.Should().Be(EmployeeErrors.NotFound(NotExistingEmployee));
+    }
+    #endregion
+ 
 }
