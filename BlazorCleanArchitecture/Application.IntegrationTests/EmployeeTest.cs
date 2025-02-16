@@ -57,8 +57,8 @@ public class EmployeeTest : BaseIntegrationTest
     public async Task GetById_ShouldReturnEmployee_WhenEmplyeeExists()
     {
         // Arrange
-        var employeeId = await CreateEmployeeAsync("Ivan3", "NewAddress", "Mail");
-        var getEmployeeById = new GetEmployeeByIdQuery(employeeId.Value);
+        var id = await CreateEmployeeAsync("Ivan3", "NewAddress", "Mail");
+        var getEmployeeById = new GetEmployeeByIdQuery(id.Value);
         
         // Ack
         var response = await Sender.Send(getEmployeeById);
@@ -104,8 +104,8 @@ public class EmployeeTest : BaseIntegrationTest
     public async Task Update_ShouldUpdateEmployee_WhenEmplyeeDoesExists()
     {
         // Arrange
-        var employeeId = await CreateEmployeeAsync("Ivan4", "NewAddress4", "Mail4");
-        var existingEmployee = await DbContext.Employees.FindAsync(employeeId.Value);
+        var id = await CreateEmployeeAsync("Ivan4", "NewAddress4", "Mail4");
+        var existingEmployee = await DbContext.Employees.FindAsync(id.Value);
         if (existingEmployee != null)
         {
             existingEmployee.Address = "AddressUpdate";
