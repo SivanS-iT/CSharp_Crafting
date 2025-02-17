@@ -17,7 +17,7 @@ namespace Application.Employees.CreateEmployee
             var employeeExists = await employeeRepository.CheckExists(request.Employee.Email, cancellationToken);
             if (employeeExists != null)
             {
-                return  Result.Failure<int>(EmployeeErrors.Exists(employeeExists.Email));
+                return  Result.Failure<int>(EmployeeErrors.EmployeeExists);
             }
 
             var addEmployee = new Employee()

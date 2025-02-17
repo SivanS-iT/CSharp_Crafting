@@ -49,7 +49,7 @@ namespace Application.UnitTests.Employees.Commands
 
             // Assert
             result.IsFailure.Should().BeTrue();
-            result.Error.Should().Be(EmployeeErrors.Exists(employeeTest.Email));
+            result.Error.Should().Be(EmployeeErrors.EmployeeExists);
         }
 
 
