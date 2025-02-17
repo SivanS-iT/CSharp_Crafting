@@ -6,7 +6,7 @@ public class UpdateEmployeeCommandValidation : AbstractValidator<UpdateEmployeeC
 {
     public UpdateEmployeeCommandValidation()
     {
-        RuleFor(c => c.employee.Name).NotEmpty();
-        RuleFor(c => c.employee.Email).NotEmpty();
+        RuleFor(c => c.employee.Name).NotEmpty().WithErrorCode(EmployeeErrorCodes.EmailMissing);
+        RuleFor(c => c.employee.Email).NotEmpty().WithErrorCode(EmployeeErrorCodes.NameMissing);
     }
 }
