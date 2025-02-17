@@ -6,7 +6,7 @@ using NSubstitute;
 
 namespace Application.UnitTests.Employees.Commands
 {
-    public class GetEmployeeListCommandHandlerTests
+    public class GetEmployeesCommandHandlerTests
     {
         private readonly IEmployeeRepository _employeeRpositoryMock;
         private readonly GetEmployeeListHandler _getEmployeeListHandler;
@@ -20,7 +20,7 @@ namespace Application.UnitTests.Employees.Commands
             new Employee { Id = 3, Name = "Colin", Address ="Colin address", Email = "email2@gmail.com"},
         ];
 
-        public GetEmployeeListCommandHandlerTests()
+        public GetEmployeesCommandHandlerTests()
         {
             _employeeRpositoryMock = Substitute.For<IEmployeeRepository>();
             _getEmployeeListHandler = new GetEmployeeListHandler(_employeeRpositoryMock);

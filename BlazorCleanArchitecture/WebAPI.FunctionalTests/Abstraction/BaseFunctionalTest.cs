@@ -15,14 +15,12 @@ public abstract class BaseFunctionalTest : IClassFixture<FunctionalTestWebAppFac
     
     protected HttpClient HttpClient { get; init;}
     
-    
     // ---------------------------------------------
     // ---------------------------------------------
     // ---------------------------------------------
-    protected const int NotExistingEmployee = 55;
+    protected const int NotExistingEmployee = 555;
     protected const string EmployeeEndpoint = "api/employee";
-
-    protected async Task<Result<int>> CreateEmployeeFuncAsync(
+    protected async Task<int> CreateEmployeeFuncAsync(
         string name = "Ivan0",
         string address = "Testing address0",
         string email = "thisIsEmail0@gmail.com")
@@ -33,8 +31,7 @@ public abstract class BaseFunctionalTest : IClassFixture<FunctionalTestWebAppFac
             Address = address,
             Email = email
         };
-        var command = new CreateEmployeeCommand(employeeRequest); 
-        var response = await HttpClient.PostAsJsonAsync($"{EmployeeEndpoint}", command);
+        var response = await HttpClient.PostAsJsonAsync(EmployeeEndpoint, employeeRequest);
         return await response.Content.ReadFromJsonAsync<int>();
     }
 }
