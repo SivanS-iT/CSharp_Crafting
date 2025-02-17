@@ -10,5 +10,4 @@ public class EmployeeErrors
 
     public static readonly Error EmployeeExists = 
             Error.Problem("Employee.Exists", $"Employee with the given Email already exists");
-    
  }
