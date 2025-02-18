@@ -17,24 +17,24 @@ services:
     image: postgres:16.2
     container_name: CleanArchitecture.Db
     volumes:
-      - ./.containers/cleanarchitecture-db:/var/lib/postgresql/data
+      - ./.containers/cleanArchitecture-db:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=cleanarchitecture
+      - POSTGRES_DB=cleanArchitecture
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
         
-  cleanarchitecture-pgadmin:
+  cleanArchitecture-pgadmin:
     image: dpage/pgadmin4
     container_name: CleanArchitecture.PgAdmin
     ports:
       - "8888:80"
     environment:
-      PGADMIN_DEFAULT_EMAIL: cleanarchitecture@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: cleanarchitecture 
+      PGADMIN_DEFAULT_EMAIL: cleanArchitecture@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: cleanArchitecture 
     volumes:
-      - ./.containers/cleanarchitecture-pgadmin:/var/lib/pgadmin/data
+      - ./.containers/cleanArchitecture-pgadmin:/var/lib/pgadmin/data
 
   cleanArchitecture.dashboard:
     image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:latest
