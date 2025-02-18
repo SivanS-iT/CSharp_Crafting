@@ -1,24 +1,43 @@
 version: '3.4'
 
 services:
-  cleanproject-db:
+  webapi:
+    image: ${DOCKER_REGISTRY-}webapi
+    container_name: CleanArchitecture.Api
+    build:
+      context: .
+      dockerfile: WebAPI/Dockerfile
+    ports:
+      - "9000:8080"
+      - "9001:8081"
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://cleanArchitecture.dashboard:18889
+  
+  cleanArchitecture-db:
     image: postgres:16.2
-    container_name: CleanProject.Db
+    container_name: CleanArchitecture.Db
     volumes:
-      - ./.containers/cleanproject-db:/var/lib/postgresql/data
+      - ./.containers/cleanarchitecture-db:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=cleanproject
+      - POSTGRES_DB=cleanarchitecture
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-  cleanproject-pgadmin:
+        
+  cleanarchitecture-pgadmin:
     image: dpage/pgadmin4
-    container_name: CleanProject.PgAdmin
+    container_name: CleanArchitecture.PgAdmin
     ports:
       - "8888:80"
     environment:
-      PGADMIN_DEFAULT_EMAIL: cleanproject@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: cleanproject 
+      PGADMIN_DEFAULT_EMAIL: cleanarchitecture@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: cleanarchitecture 
     volumes:
-      - ./.containers/cleanproject-pgadmin:/var/lib/pgadmin/data
+      - ./.containers/cleanarchitecture-pgadmin:/var/lib/pgadmin/data
+
+  cleanArchitecture.dashboard:
+    image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:latest
+    container_name: aspire.dashboard
+    ports:
+      - 18888:18888
