@@ -1,5 +1,9 @@
 ﻿namespace Domain.Shared;
 
+
+/// <summary>
+/// Represents a standard validation error
+/// </summary>
 public sealed record ValidationError : Error
 {
     public ValidationError(Error[] errors)

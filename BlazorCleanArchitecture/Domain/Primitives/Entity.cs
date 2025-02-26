@@ -1,9 +1,9 @@
 namespace Domain.Primitives;
 
+/// <summary>
+/// Base type for all database entites
+/// </summary>
 public abstract class Entity
 { 
-    /// <summary>
-    /// Unique id for entities
-    /// </summary>
     public int Id { get; set; }
 }

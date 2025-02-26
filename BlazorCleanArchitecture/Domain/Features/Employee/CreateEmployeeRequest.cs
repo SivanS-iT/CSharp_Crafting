@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Features.Employee
 {
-    public class CreateEmployeeRequest
+    /// <summary>
+    /// Class used to add employee to the database
+    /// </summary>
+    public sealed class CreateEmployeeRequest
     {
         public string Name { get; set; }
         public string? Address { get; set; }

@@ -2,6 +2,10 @@
 
 namespace Domain.Shared;
 
+
+/// <summary>
+/// Represents a standard result
+/// </summary>
 public class Result
 {
     public Result(bool isSuccess, Error error)
@@ -33,6 +37,12 @@ public class Result
         new(default, false, error);
 }
 
+
+
+/// <summary>
+/// Represents a standard result with a value of a certain type.
+/// </summary>
+/// <typeparam name="TValue"></typeparam>
 public class Result<TValue> : Result
 {
     private readonly TValue? _value;

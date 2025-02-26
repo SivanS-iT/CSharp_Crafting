@@ -5,18 +5,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories.Generic;
 
+
+/// <summary>
+/// Provides a generic repository implementation for performing CRUD operations on entities.
+/// </summary>
+/// <param name="dbContext"></param>
+/// <typeparam name="TEntity"></typeparam>
 internal abstract class GenericRepository<TEntity>(AppDbContext dbContext) 
     : IGenericRepository<TEntity> where TEntity : Entity
 {
     protected readonly AppDbContext DbContext = dbContext;
 
     
-    public virtual async Task<TEntity?> GetById(int id, CancellationToken cancellationToken )
+    public async Task<TEntity?> GetById(int id, CancellationToken cancellationToken )
     {
-        return await DbContext.Set<TEntity>().FindAsync(id);
+        return await DbContext.Set<TEntity>().FindAsync(id, cancellationToken);
     }
     
-    public async Task<List<TEntity>> GetAll(CancellationToken cancellationToken )
+    public async Task<List<TEntity>?> GetAll(CancellationToken cancellationToken )
     {
         return await DbContext.Set<TEntity>().ToListAsync(cancellationToken);
     }

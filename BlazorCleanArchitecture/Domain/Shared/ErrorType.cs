@@ -1,5 +1,8 @@
 ﻿namespace Domain.Shared;
 
+/// <summary>
+/// Defines an enum for error types
+/// </summary>
 public enum ErrorType
 {
     Failure = 0,

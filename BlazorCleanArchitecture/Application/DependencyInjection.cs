@@ -4,6 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;
 
+
+/// <summary>
+/// Used to inject this project as a service and for better structure
+/// </summary>
 public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
