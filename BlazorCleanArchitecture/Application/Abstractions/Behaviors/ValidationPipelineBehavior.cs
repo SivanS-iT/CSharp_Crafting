@@ -7,11 +7,27 @@ using MediatR;
 
 namespace Application.Abstractions.Behaviors;
 
+/// <summary>
+/// Pipeline which validates requests.
+/// </summary>
+/// <param name="validators"></param>
+/// <typeparam name="TRequest"></typeparam>
+/// <typeparam name="TResponse"></typeparam>
 internal sealed class ValidationPipelineBehavior<TRequest, TResponse>(
     IEnumerable<IValidator<TRequest>> validators)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IBaseCommand
 {
+    
+    
+    /// <summary>
+    /// Validates incoming requests
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="next"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    /// <exception cref="ValidationException"></exception>
     public async Task<TResponse> Handle(
         TRequest request,
         RequestHandlerDelegate<TResponse> next,
@@ -46,6 +62,12 @@ internal sealed class ValidationPipelineBehavior<TRequest, TResponse>(
         throw new ValidationException(validationFailures);
     }
 
+    
+    /// <summary>
+    /// Runs validators and checks for validation failures.
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
     private async Task<ValidationFailure[]> ValidateAsync(TRequest request)
     {
         if (!validators.Any())
@@ -66,6 +88,12 @@ internal sealed class ValidationPipelineBehavior<TRequest, TResponse>(
         return validationFailures;
     }
 
+    
+    /// <summary>
+    /// Creates an error which encapsulates multiple validation errors.
+    /// </summary>
+    /// <param name="validationFailures"></param>
+    /// <returns></returns>
     private static ValidationError CreateValidationError(ValidationFailure[] validationFailures) =>
         new(validationFailures.Select(f => Error.Problem(f.ErrorCode, f.ErrorMessage)).ToArray());
 }

@@ -3,6 +3,9 @@ using Domain.Shared;
 
 namespace Domain.Features.Employee;
 
+/// <summary>
+/// Represents common errors for Employee entity
+/// </summary>
 public class EmployeeErrors
 {
     public static Error NotFound(int employeeId) =>

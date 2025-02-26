@@ -1,5 +1,9 @@
 ﻿namespace Domain.Shared;
 
+
+/// <summary>
+/// Represents a standard error
+/// </summary>
 public record Error
 {
     public static readonly Error None = new(string.Empty, string.Empty, ErrorType.Failure);
