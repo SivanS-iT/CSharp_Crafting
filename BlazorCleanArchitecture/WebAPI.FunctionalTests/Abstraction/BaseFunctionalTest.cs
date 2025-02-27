@@ -15,6 +15,8 @@ public abstract class BaseFunctionalTest : IClassFixture<FunctionalTestWebAppFac
     
     protected HttpClient HttpClient { get; init;}
     
+    
+    
     // ---------------------------------------------
     // ---------------------------------------------
     // ---------------------------------------------
