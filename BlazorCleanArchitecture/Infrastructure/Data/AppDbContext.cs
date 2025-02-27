@@ -1,19 +1,20 @@
 ﻿using Domain.Features.Employee;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
-    public class AppDbContext : DbContext
+    
+    /// <summary>
+    /// epresents the database context for the application, responsible for interacting with the database.
+    /// </summary>
+    /// <param name="options"></param>
+    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
-        }
-
         public DbSet<Employee> Employees { get; set; }
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        }
     }
 }

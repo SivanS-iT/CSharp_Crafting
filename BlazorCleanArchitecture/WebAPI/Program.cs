@@ -1,51 +1,73 @@
-using Application.Handlers.EmployeeHandler;
-using Domain.Features.Employee;
-using Infrastructure.Data;
-using Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
+using Application;
+using Infrastructure;
 using Microsoft.Net.Http.Headers;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using WebAPI.Configs;
+using WebApi.Extensions;
 
-internal class Program
-{
-    private static void Main(string[] args)
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration);
+
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource.AddService(DiagnosticsConfig.ServiceName))
+    .WithMetrics(metrics =>
     {
-        var builder = WebApplication.CreateBuilder(args);
+        metrics
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation();
 
-        // Add services to the container.
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-        builder.Services.AddControllers();
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        metrics.AddOtlpExporter();
+    })
+    .WithTracing(tracing =>
+    {
+        tracing
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation()
+            .AddEntityFrameworkCoreInstrumentation();
 
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-        builder.Services.AddDbContext<AppDbContext>(options =>
-                    options.UseNpgsql(connectionString));
+        tracing.AddOtlpExporter();
+    });
 
-        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetEmployeeListHandler).Assembly));
-        builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
 
-        var app = builder.Build();
+builder.WebHost.UseUrls("http://0.0.0.0:8080");
 
-        // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-            app.UseCors(policy =>
-            {
-                policy.WithOrigins("https://localhost:7284")
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .WithHeaders(HeaderNames.ContentType);
-            });
-        }
+var app = builder.Build();
 
-        app.UseHttpsRedirection();
-
-        app.UseAuthorization();
-
-        app.MapControllers();
-
-        app.Run();
-    }
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    app.UseCors(policy =>
+    {
+        policy.WithOrigins("https://localhost:7284")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .WithHeaders(HeaderNames.ContentType);
+    });
+    app.ApplyMigrations();
 }
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+
+public partial class Program;

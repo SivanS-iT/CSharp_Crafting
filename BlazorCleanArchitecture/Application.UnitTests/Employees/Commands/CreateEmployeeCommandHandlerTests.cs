@@ -1,6 +1,5 @@
-﻿using Application.Commands;
-using Application.Handlers.EmployeeHandler;
-using Application.Queries.EmployeeQuery;
+﻿using Application.Abstractions.Data;
+using Application.Employees.CreateEmployee;
 using Domain.Features.Employee;
 using FluentAssertions;
 using NSubstitute;
@@ -10,98 +9,90 @@ namespace Application.UnitTests.Employees.Commands
     public class CreateEmployeeCommandHandlerTests
     {
         private readonly IEmployeeRepository _employeeRpositoryMock;
-        private readonly CreateEmployeeHandler _createEmployeeHandler;
+        private readonly CreateEmployeeCommandHandler _createEmployeeCommandHandler;
         private readonly CreateEmployeeCommand _createEmployeeCommand;
+        private readonly IUnitOfWork _unitOfWorkMock;
 
         public CreateEmployeeCommandHandlerTests()
         {
             _employeeRpositoryMock = Substitute.For<IEmployeeRepository>();
-            _createEmployeeHandler = new CreateEmployeeHandler(_employeeRpositoryMock);
-            _createEmployeeCommand = new CreateEmployeeCommand(employeeTest);
+            _unitOfWorkMock = Substitute.For<IUnitOfWork>();
+            _createEmployeeCommandHandler = new CreateEmployeeCommandHandler(_employeeRpositoryMock, _unitOfWorkMock);
+            _createEmployeeCommand = new CreateEmployeeCommand(employeeTestRequest);
         }
 
-
+        private static readonly CreateEmployeeRequest employeeTestRequest = new()
+        {
+            Address = "Testing address",
+            Name = "Ivan",
+            Email = "TestingEmail"
+        };
         private static readonly Employee employeeTest = new()
         {
             Id = 1,
             Address = "Testing address",
             Name = "Ivan",
+            Email = "TestingEmail"
         };
         private static readonly Employee? employeeAsNull = null;
-        private static readonly string employeeExistsMessage = "User already exists";
-        private static readonly string employeeAdded = "User added";
 
 
 
-        /// <summary>
-        /// Returns false when employee does exist!
-        /// </summary>
         [Fact]
-        public async void Handle_Should_ReturnFailureResult_WhenCreateEmployeeNameExists()
+        public async void Handle_Should_ReturnFailureResult_WhenCreateEmployeeEmailExists()
         {
             // Arrange
-            _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeTest);
+            _employeeRpositoryMock.CheckExists(employeeTest.Email, default).Returns(employeeTest);
 
             // Act
-            var result = await _createEmployeeHandler.Handle(_createEmployeeCommand, default);
+            var result = await _createEmployeeCommandHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
-            result.Flag.Should().BeFalse();
-            result.Message.Should().BeEquivalentTo(employeeExistsMessage);
+            result.IsFailure.Should().BeTrue();
+            result.Error.Should().Be(EmployeeErrors.EmployeeExists);
         }
 
 
-        /// <summary>
-        /// Returns true when employee does not exists!
-        /// </summary>
         [Fact]
-        public async void Handle_Should_ReturnTrueResult_WhenCreateEmployeeNameDoesNotExist()
+        public async void Handle_Should_ReturnTrueResult_WhenCreateEmployeeEmailDoesNotExist()
         {
             // Arrange
-            _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeAsNull);
+            _employeeRpositoryMock.CheckExists(employeeTest.Email, default).Returns(employeeAsNull);
             
             // Act
-            var result = await _createEmployeeHandler.Handle(_createEmployeeCommand, default);
+            var result = await _createEmployeeCommandHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
-            result.Flag.Should().BeTrue();
-            result.Message.Should().BeEquivalentTo(employeeAdded);
+            result.IsSuccess.Should().BeTrue();
         }
 
 
 
-        /// <summary>
-        /// Employee should not be created
-        /// </summary>
         [Fact]
-        public async void Handle_Should_NotCreateEmployee_WhenEmployeeExists()
+        public async void Handle_Should_CallUnitOfWork()
         {
             // Arrange
-            _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeTest);
+            _employeeRpositoryMock.CheckExists(employeeTest.Email, default).Returns(employeeAsNull);
 
             // Act
-            await _createEmployeeHandler.Handle(_createEmployeeCommand, default);
+            await _createEmployeeCommandHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
-            await _employeeRpositoryMock.Received(0).CreateEmployee(Arg.Is<Employee>(e => e == employeeTest), default);
-
+            await _unitOfWorkMock.Received(1).SaveChangesAsync(Arg.Any<CancellationToken>());
         }
 
 
-        /// <summary>
-        /// Employee should be created
-        /// </summary>
         [Fact]
-        public async void Handle_Should_CreateEmployee_WhenEmployeeDoesNotExist()
+        public async void Handle_Should_CallRepository()
         {
             // Arrange
-            _employeeRpositoryMock.CheckExists(employeeTest.Name, default).Returns(employeeAsNull);
+            _employeeRpositoryMock.CheckExists(employeeTest.Email, default).Returns(employeeAsNull);
 
             // Act
-            await _createEmployeeHandler.Handle(_createEmployeeCommand, default);
+            await _createEmployeeCommandHandler.Handle(_createEmployeeCommand, default);
 
             // Assert
-            await _employeeRpositoryMock.Received(1).CreateEmployee(Arg.Is<Employee>(e => e == employeeTest), default);
+            await  _employeeRpositoryMock.Received(1).Add(Arg.Any<Employee>(), default);
         }
 
     }

@@ -1,57 +1,27 @@
-﻿using Domain.DTOs;
-using Domain.Features.Employee;
+﻿using Domain.Features.Employee;
 using Infrastructure.Data;
+using Infrastructure.Repositories.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class EmployeeRepository(AppDbContext appDbContext) : IEmployeeRepository
+    
+    /// <summary>
+    /// Provides database repository pattern specific to the <see cref="Employee"/> entity.
+    /// </summary>
+    /// <param name="appDbContext"></param>
+    internal class EmployeeRepository(AppDbContext appDbContext) : GenericRepository<Employee>(appDbContext), IEmployeeRepository
     {
-        private readonly AppDbContext _appDbContext = appDbContext;
-
-
-        public async Task<Employee?> CheckExists(string name, CancellationToken cancellationToken)
+        public async Task<Employee?> CheckExists(string email, CancellationToken cancellationToken)
         {
-            return await _appDbContext.Employees.FirstOrDefaultAsync(
-                u => u.Name.ToLower().Equals(name.ToLower()), cancellationToken);
+            return await appDbContext.Employees.FirstOrDefaultAsync(
+                u => u.Email.ToLower().Equals(email.ToLower()), cancellationToken);
         }
 
         public async Task<Employee?> CheckExistsById(int employeeId, CancellationToken cancellationToken)
         {
-            return await _appDbContext.Employees.FirstOrDefaultAsync(u => u.Id == employeeId);
-        }
-
-
-
-        public async Task<List<Employee>> GetEmployees(CancellationToken cancellationToken)
-        {
-            return await _appDbContext.Employees.ToListAsync(cancellationToken: cancellationToken);
-        }
-
-        public async Task<Employee?> GetEmployeeById(int employeeId, CancellationToken cancellationToken)
-        {
-            return await _appDbContext.Employees.FindAsync(employeeId, cancellationToken);
-        }
-
-        public async Task<Employee> CreateEmployee(Employee employee, CancellationToken cancellationToken)
-        {
-            await _appDbContext.Employees.AddAsync(employee);
-            await _appDbContext.SaveChangesAsync(cancellationToken);
-            return employee;
-        }
-
-        public async Task<ServiceResponse> UpdateEmployee(Employee employee, CancellationToken cancellationToken)
-        {
-            _appDbContext.Update(employee);
-            await _appDbContext.SaveChangesAsync(cancellationToken);
-            return new ServiceResponse(true, "User updated");
-        }
-
-        public async Task<ServiceResponse> DeleteEmployee(Employee employee, CancellationToken cancellationToken)
-        {
-            _appDbContext.Employees.Remove(employee);
-            await _appDbContext.SaveChangesAsync(cancellationToken);
-            return new ServiceResponse(true, "User deleted");
+            return await appDbContext.Employees.FirstOrDefaultAsync(u => u.Id == employeeId,
+                cancellationToken: cancellationToken);
         }
     }
 }
