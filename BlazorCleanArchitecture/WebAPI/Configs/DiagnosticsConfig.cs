@@ -8,6 +8,4 @@ namespace WebAPI.Configs;
 public static class DiagnosticsConfig
 {
     public const string ServiceName = "CleanArchitecture";
-
-    public static Meter Meter = new(ServiceName);
 }

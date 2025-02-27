@@ -12,7 +12,7 @@ services:
       - "9001:8081"
     environment:
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://cleanArchitecture.dashboard:18889
-  
+
   cleanArchitecture-db:
     image: postgres:16.2
     container_name: CleanArchitecture.Db

@@ -29,8 +29,6 @@ builder.Services.AddOpenTelemetry()
             .AddAspNetCoreInstrumentation()
             .AddHttpClientInstrumentation();
 
-        metrics.AddMeter(DiagnosticsConfig.Meter.Name);
-
         metrics.AddOtlpExporter();
     })
     .WithTracing(tracing =>
