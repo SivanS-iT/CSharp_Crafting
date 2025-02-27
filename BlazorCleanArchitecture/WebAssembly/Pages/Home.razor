@@ -6,6 +6,7 @@
 @using Blazored.Toast.Services
 @using WebAssembly.Data
 @using WebAssembly.Services
+@using WebAssembly.Services.Employee
 
 @inject IToastService toastService
 @inject IEmployeeService emp
@@ -27,6 +28,12 @@
                         class="form-control mb-3" />
             <ValidationMessage For="()=>employee.Address" />
 
+            <FloatingTextArea @bind-Value="employee.Email"
+                              Label="Custom Email"
+                              Placeholder="eg.newMail"
+                              class="form-control mb-3" />
+            <ValidationMessage For="()=>employee.Email" />
+            
             <button class="btn btn-primary mt-5 mb-5" type="submit">Save</button>
         </EditForm>
     </div>
@@ -50,6 +57,7 @@
                             <td>@item.Id</td>
                             <td>@item.Name</td>
                             <td>@item.Address</td>
+                            <td>@item.Email</td>
                             <td>
                                 <button class="btn btn-info btn-sm" @onclick="() => EditClicked(item)">Edit</button>
                             </td>
@@ -66,25 +74,21 @@
 
 @code{
     Employee employee = new();
-    List<Employee> Employees = new();
+    List<Employee>? Employees = new();
     protected override async Task OnInitializedAsync() => await GetData();
-    private async Task GetData() => Employees = await emp.GetAsync();
+    private async Task GetData() => Employees = await emp.GetAll(cancellationToken: default);
 
 
     // Button Save ------------------------------------------
     async Task Save()
     {
-        var response = new ServiceResponse(false, null!);
-        if (employee.Id > 0) 
-            response = await emp.UpdateAsync(employee);
-        else 
-            response = await emp.AddAsync(employee);
+        var addResponse = await emp.Add(employee, cancellationToken: default);
 
-        if (!response.Flag)
-        {
-            toastService.ShowError("Error on adding user!");
-            return;
-        }
+        // if (addResponse != null)
+        // {
+        //     toastService.ShowError("Error on adding user!");
+        //     return;
+        // }
         toastService.ShowSuccess("User has been added!");
 
         await GetData();
@@ -95,7 +99,7 @@
     void EditClicked(Employee incomEmp) => employee = incomEmp;
     async void DeleteClicked(int id)
     {
-        var (flag, massage) = await emp.DeleteAsync(id);
+        emp.Delete(id);
 
         toastService.ShowInfo("User has been deleted!");
         await GetData();
