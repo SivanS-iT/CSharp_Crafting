@@ -7,6 +7,7 @@ public class CreateEmployeeCommandValidator : AbstractValidator<CreateEmployeeCo
     public CreateEmployeeCommandValidator()
     {
         RuleFor(c => c.Employee.Email).NotEmpty().WithErrorCode(EmployeeErrorCodes.EmailMissing);
+        RuleFor(c => c.Employee.Email).EmailAddress().WithErrorCode(EmployeeErrorCodes.EmailIsNotValid);
         RuleFor(c => c.Employee.Name).NotEmpty().WithErrorCode(EmployeeErrorCodes.NameMissing);
     }
     

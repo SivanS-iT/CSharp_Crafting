@@ -21,12 +21,7 @@ public class FunctionalTestWebAppFactory : WebApplicationFactory<Program>, IAsyn
         .WithPassword("postgres")
         .Build();
 
-
-    // private NpgsqlConnection _dbConnection = null!;
-    // private Respawner _applicationRespawner = null!;
-    // public HttpClient AuthorizedHttpClient { get; private set; } = null!;
-    // public HttpClient UnauthorizedHttpClient { get; private set; } = null!;
-
+    
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureTestServices(services =>
