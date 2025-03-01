@@ -9,7 +9,7 @@ namespace Application;
 /// Used to inject this project as a service and for better structure
 /// </summary>
 public static class DependencyInjection
-{
+{ 
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         var assembly = typeof(DependencyInjection).Assembly;

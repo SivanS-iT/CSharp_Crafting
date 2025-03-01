@@ -14,31 +14,31 @@ namespace Infrastructure.Repositories.Generic;
 internal abstract class GenericRepository<TEntity>(AppDbContext dbContext) 
     : IGenericRepository<TEntity> where TEntity : Entity
 {
-    protected readonly AppDbContext DbContext = dbContext;
+    private readonly AppDbContext _dbContext = dbContext;
 
     
     public async Task<TEntity?> GetById(int id, CancellationToken cancellationToken )
     {
-        return await DbContext.Set<TEntity>().FindAsync(id, cancellationToken);
+        return await _dbContext.Set<TEntity>().FindAsync(id, cancellationToken);
     }
     
     public async Task<List<TEntity>?> GetAll(CancellationToken cancellationToken )
     {
-        return await DbContext.Set<TEntity>().ToListAsync(cancellationToken);
+        return await _dbContext.Set<TEntity>().ToListAsync(cancellationToken);
     }
 
     public async Task Add(TEntity entity, CancellationToken cancellationToken)
     {
-        await DbContext.Set<TEntity>().AddAsync(entity, cancellationToken);
+        await _dbContext.Set<TEntity>().AddAsync(entity, cancellationToken);
     }
 
     public void Update(TEntity entity)
     {
-        DbContext.Set<TEntity>().Update(entity);
+        _dbContext.Set<TEntity>().Update(entity);
     }
 
     public void Delete(TEntity entity)
     {
-        DbContext.Set<TEntity>().Remove(entity);
+        _dbContext.Set<TEntity>().Remove(entity);
     }
 }
