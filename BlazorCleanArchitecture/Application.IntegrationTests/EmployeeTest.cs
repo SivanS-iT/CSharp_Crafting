@@ -39,11 +39,11 @@ public class EmployeeTest : BaseIntegrationTest
         await CreateEmployeeAsync(
             "Employee",
             "EmployeeAddress",
-            "EmployeeEmail");
+            "employeeEmail@gmail.com");
         var response = await CreateEmployeeAsync(
             "Employee2",
             "EmployeeAddress2",
-            "EmployeeEmail");
+            "employeeEmail@gmail.com");
         
         // Assert
         Assert.True(response.IsFailure);
@@ -57,7 +57,7 @@ public class EmployeeTest : BaseIntegrationTest
     public async Task GetById_ShouldReturnEmployee_WhenEmplyeeExists()
     {
         // Arrange
-        var id = await CreateEmployeeAsync("Ivan3", "NewAddress", "Mail");
+        var id = await CreateEmployeeAsync("Ivan3", "NewAddress", "mail@gmail.com");
         var getEmployeeById = new GetEmployeeByIdQuery(id.Value);
         
         // Ack
@@ -104,7 +104,7 @@ public class EmployeeTest : BaseIntegrationTest
     public async Task Update_ShouldUpdateEmployee_WhenEmplyeeDoesExists()
     {
         // Arrange
-        var id = await CreateEmployeeAsync("Ivan4", "NewAddress4", "Mail4");
+        var id = await CreateEmployeeAsync("Ivan4", "NewAddress4", "mail4@gmail.com");
         var existingEmployee = await DbContext.Employees.FindAsync(id.Value);
         if (existingEmployee != null)
         {
@@ -153,7 +153,7 @@ public class EmployeeTest : BaseIntegrationTest
     public async Task Delete_ShouldDeleteEmployee_WhenEmplyeeDoesExists()
     {
         // Arrange
-        var employeeId = await CreateEmployeeAsync("Ivan5", "NewAddress5", "Mail5");
+        var employeeId = await CreateEmployeeAsync("Ivan5", "NewAddress5", "mail5@gmail.com");
         var deleteEmployeeCommand = new DeleteEmployeeByIdCommand(employeeId.Value);
         
         // Ack

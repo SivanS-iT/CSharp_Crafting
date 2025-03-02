@@ -20,7 +20,7 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         
-        var connectionString = configuration.GetConnectionString("RunWithDocker");
+        var connectionString = configuration.GetConnectionString("RunWithDocker"); // LocalConnection/RunWithDocker
         services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(connectionString));
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();

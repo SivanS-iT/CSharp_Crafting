@@ -25,14 +25,14 @@ namespace Application.UnitTests.Employees.Commands
         {
             Address = "Testing address",
             Name = "Ivan",
-            Email = "TestingEmail"
+            Email = "testingEmail@gmail.com"
         };
         private static readonly Employee employeeTest = new()
         {
             Id = 1,
             Address = "Testing address",
             Name = "Ivan",
-            Email = "TestingEmail"
+            Email = "testingEmail@gmail.com"
         };
         private static readonly Employee? employeeAsNull = null;
 
