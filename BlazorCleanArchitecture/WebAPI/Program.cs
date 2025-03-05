@@ -2,10 +2,6 @@ using Application;
 using Infrastructure;
 using Microsoft.Net.Http.Headers;
 using OpenTelemetry.Logs;
-using OpenTelemetry.Metrics;
-using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
-using WebAPI.Configs;
 using WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,28 +17,7 @@ builder.Services
     .AddInfrastructure(builder.Configuration);
 
 
-builder.Services.AddOpenTelemetry()
-    .ConfigureResource(resource => resource.AddService(DiagnosticsConfig.ServiceName))
-    .WithMetrics(metrics =>
-    {
-        metrics
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation();
-
-        metrics.AddOtlpExporter();
-    })
-    .WithTracing(tracing =>
-    {
-        tracing
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddEntityFrameworkCoreInstrumentation();
-
-        tracing.AddOtlpExporter();
-    });
-
 builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
-
 builder.WebHost.UseUrls("http://0.0.0.0:8080");
 
 var app = builder.Build();

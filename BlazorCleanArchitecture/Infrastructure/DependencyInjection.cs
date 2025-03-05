@@ -7,6 +7,10 @@ using Infrastructure.Repositories.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using WebAPI.Configs;
 
 namespace Infrastructure;
 
@@ -25,5 +29,25 @@ public static class DependencyInjection
             options.UseNpgsql(connectionString));
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        
+        services.AddOpenTelemetry()
+            .ConfigureResource(resource => resource.AddService(DiagnosticsConfig.ServiceName))
+            .WithMetrics(metrics =>
+            {
+                metrics
+                    .AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation();
+
+                metrics.AddOtlpExporter();
+            })
+            .WithTracing(tracing =>
+            {
+                tracing
+                    .AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation()
+                    .AddEntityFrameworkCoreInstrumentation();
+
+                tracing.AddOtlpExporter();
+            });
     }
 }

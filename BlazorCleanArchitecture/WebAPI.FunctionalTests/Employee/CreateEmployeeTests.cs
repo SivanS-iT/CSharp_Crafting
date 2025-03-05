@@ -23,7 +23,6 @@ public class CreateEmployeeTests : BaseFunctionalTest
             Address = "Address", 
             Email = "thisIsNewEmail345@gmail.com"
         };
-
         // Act
         var response = await HttpClient.PostAsJsonAsync(EmployeeEndpoint, request);
 
