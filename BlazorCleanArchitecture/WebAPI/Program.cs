@@ -3,6 +3,7 @@ using Infrastructure;
 using Microsoft.Net.Http.Headers;
 using OpenTelemetry.Logs;
 using WebApi.Extensions;
+using WebApi.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,9 +17,12 @@ builder.Services
     .AddApplication()
     .AddInfrastructure(builder.Configuration);
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
 builder.WebHost.UseUrls("http://0.0.0.0:8080");
+
 
 var app = builder.Build();
 
@@ -40,6 +44,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseExceptionHandler();
 
 app.MapControllers();
 
