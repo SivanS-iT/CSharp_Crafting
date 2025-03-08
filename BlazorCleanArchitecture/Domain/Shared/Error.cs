@@ -6,7 +6,7 @@
 /// </summary>
 public record Error
 {
-    protected Error(string code, string description, ErrorType type)
+    public Error(string code, string description, ErrorType type)
     {
         Code = code;
         Description = description;
