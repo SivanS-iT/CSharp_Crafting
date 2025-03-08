@@ -15,14 +15,9 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController : ControllerBase
+    public class EmployeeController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator _mediator;
-
-        public EmployeeController(IMediator mediator) 
-        {
-            this._mediator = mediator;
-        }
+        private readonly IMediator _mediator = mediator;
 
         /// <summary>
         /// Get ALL

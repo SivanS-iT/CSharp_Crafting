@@ -11,7 +11,7 @@ services:
       - "9000:8080"
       - "9001:8081"
     environment:
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://cleanArchitecture.dashboard:18889
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://cleanArchitecture-dashboard:18889
 
   cleanArchitecture-db:
     image: postgres:16.2
@@ -36,7 +36,7 @@ services:
     volumes:
       - ./.containers/cleanArchitecture-pgadmin:/var/lib/pgadmin/data
 
-  cleanArchitecture.dashboard:
+  cleanArchitecture-dashboard:
     image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:latest
     container_name: aspire.dashboard
     ports:
