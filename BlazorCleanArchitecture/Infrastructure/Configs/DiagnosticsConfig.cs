@@ -1,6 +1,4 @@
-using System.Diagnostics.Metrics;
-
-namespace WebAPI.Configs;
+namespace Infrastructure.Configs;
 
 /// <summary>
 /// Helper class for openTelemetry

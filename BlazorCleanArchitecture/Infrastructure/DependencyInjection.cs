@@ -1,6 +1,7 @@
 using Application.Abstractions.Data;
 using Domain.Abstractions;
 using Domain.Features.Employee;
+using Infrastructure.Configs;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Infrastructure.Repositories.Generic;
@@ -10,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using WebAPI.Configs;
 
 namespace Infrastructure;
 

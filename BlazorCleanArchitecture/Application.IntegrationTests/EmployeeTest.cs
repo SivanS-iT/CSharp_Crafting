@@ -25,7 +25,7 @@ public class EmployeeTest : BaseIntegrationTest
     [Fact]
     public async Task Create_ShouldAddEmployee_WhenCommandIsValid()
     {
-        // Arrange
+        // Arrange and Ack
         var response = await CreateEmployeeAsync();
         
         // Assert
@@ -35,7 +35,7 @@ public class EmployeeTest : BaseIntegrationTest
     [Fact]
     public async Task Create_ShouldAddNotEmployee_WhenEmailAllreadyExits()
     {
-        // Arrange
+        // Arrange and Ack
         await CreateEmployeeAsync(
             "Employee",
             "EmployeeAddress",

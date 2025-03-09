@@ -8,7 +8,7 @@ namespace Domain.Features.Employee;
 public static class EmployeeErrors
 {
     public static Error NotFound(int employeeId) =>
-        Error.NotFound("Employee.NotFound", $"Employee with the name {employeeId} doesn't exist");
+        Error.NotFound("Employee.NotFound", $"Employee with the id {employeeId} doesn't exist");
 
     public static readonly Error EmployeeExists = 
             Error.Problem("Employee.Exists", $"Employee with the given Email already exists");
